@@ -34,7 +34,7 @@ void setup() {
  
 void loop() {
   f_camina_adelante();
-  f_mueve_cabeza();;
+  f_mueve_cabeza();
 }
 
 void f_camina_adelante(){
