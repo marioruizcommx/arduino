@@ -14,12 +14,18 @@ Servo hombroIzquierdo;
 void f_camina_adelante();
 void f_mueve_cabeza();
 int i,j;
+const int Trigger = 2;   //Pin digital 2 para el Trigger del sensor
+const int Echo = 3;   //Pin digital 3 para el Echo del sensor
+long t; //timepo que demora en llegar el eco
+long d; //distancia en centimetros
 
 void setup() {
-  // Iniciamos el monitor serie para mostrar el resultado
+  
   Serial.begin(9600);
+  pinMode(Trigger, OUTPUT); //pin como salida
+  pinMode(Echo, INPUT);  //pin como entrada
+  digitalWrite(Trigger, LOW);//Inicializamos el pin con 0
  
-  // Iniciamos el servo para que empiece a trabajar con el pin 9
   cuello.attach(2); 
   rodillaDerecha.attach(3); 
   rodillaIzquierda.attach(4);
@@ -29,12 +35,25 @@ void setup() {
   piernaIzquierda.attach(8);
   hombroDerecho.attach(9);
   hombroIzquierdo.attach(10); 
-  
 }
  
 void loop() {
-  f_camina_adelante();
-  f_mueve_cabeza();
+  digitalWrite(Trigger, HIGH);
+  delayMicroseconds(10);          //Enviamos un pulso de 10us
+  digitalWrite(Trigger, LOW);
+  
+  t = pulseIn(Echo, HIGH); //obtenemos el ancho del pulso
+  d = t/59;             //escalamos el tiempo a una distancia en cm
+  
+    while(d >= 20){
+     f_camina_adelante();
+    }
+
+  Serial.print("Distancia: ");
+  Serial.print(d);      //Enviamos serialmente el valor de la distancia
+  Serial.print("cm");
+  Serial.println();
+  delay(100);          //Hacemos una pausa de 100ms
 }
 
 void f_camina_adelante(){
@@ -82,12 +101,10 @@ void f_camina_adelante(){
 }
 
 void f_mueve_cabeza(){
-  
   cuello.write(0);
   delay(1000);
   cuello.write(180);
   delay(1000);
   cuello.write(90);
   delay(1000);
-
 }
