@@ -1,4 +1,4 @@
- // Incluímos la librería para poder controlar el servo
+// Incluímos la librería para poder controlar el servo
 
 #include <Servo.h>
 
@@ -286,6 +286,4 @@ void f_mueve_cabeza(){
 
   cuello.write(90);
 
-  delay(1000);
-
-}
+  delay(10
