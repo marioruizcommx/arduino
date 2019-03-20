@@ -1,9 +1,7 @@
 // Incluímos la librería para poder controlar el servo
-
 #include <Servo.h>
 
 // Declaramos la variable para controlar el servo
-
 Servo sv_cuello;
 Servo sv_rodillaDerecha;
 Servo sv_rodillaIzquierda;
@@ -27,9 +25,7 @@ long t; //timepo que demora en llegar el eco
 long d; //distancia en centimetros
 
 
-
 //Inicializamos los Pines
-
 void setup() {
   Serial.begin(9600);
   pinMode(led, OUTPUT); 
