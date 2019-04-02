@@ -1,146 +1,262 @@
-// Incluímos la librería para poder controlar el servo
+/* Sweep
+ by BARRAGAN <http://barraganstudio.com>
+ This example code is in the public domain.
+
+ modified 8 Nov 2013
+ by Scott Fitzgerald
+ http://www.arduino.cc/en/Tutorial/Sweep
+*/
+
 #include <Servo.h>
 
-// Declaramos la variable para controlar el servo
-Servo sv_cuello;
-Servo sv_rodillaDerecha;
-Servo sv_rodillaIzquierda;
-Servo sv_codoDerecho;
-Servo sv_codoIzquierdo;
-Servo sv_piernaDerecha;
-Servo sv_piernaIzquierda;
-Servo sv_hombroDerecho;
-Servo sv_hombroIzquierdo;
-void f_pasoDerecho();
-void f_mueve_cabeza();
+Servo sv_cuello;  // create servo object to control a servo
+Servo sv_piernaDerecha;  // create servo object to control a servo
+Servo sv_piernaIzquierda;  // create servo object to control a servo
+Servo sv_hombroIzquierdo;  // create servo object to control a servo
+Servo sv_hombroDerecho;  // create servo object to control a servo
+Servo sv_rodillaIzquierda;  // create servo object to control a servo
+Servo sv_rodillaDerecha;  // create servo object to control a servo
+Servo sv_codoIzquierdo;  // create servo object to control a servo
+Servo sv_codoDerecho;  // create servo object to control a servo
 
-void f_pasoIzquierdo();
-int i,j;
-int li_lecturaDePila=1;
-int v_sobranteDeBateria;
-int led = 13;
-const int Trigger = 2;   //Pin digital 2 para el Trigger del sensor
-const int Echo = 3;   //Pin digital 3 para el Echo del sensor
-long t; //timepo que demora en llegar el eco
-long d; //distancia en centimetros
+int e_cuello;
+int e_piernaDerecha;
+int e_piernaIzquierda;
+int e_hombroIzquierdo;
+int e_hombroDerecho;
+int e_rodillaIzquierda;
+int e_rodillaDerecha;
+int e_codoIzquierdo;
+int e_codoDerecho;
+int salida;
 
+void f_pruebaComponentes();
 
-//Inicializamos los Pines
+int f_getEstadoCuello();
+void f_setEstadoCuello(int aValue);
+int f_getEstadoCuello();
+void f_setEstadoCuello(int aValue);
+int f_getPiernaDerecha();
+void f_setPiernaDerecha(int aValue);
+int f_getPiernaIzquierda();
+void f_setPiernaIzquierda(int aValue);
+int f_getHombroIzquierdo();
+void f_setHombroIzquierdo(int aValue);
+int f_getHombroDerecho();
+void f_setHombroDerecho(int aValue);
+int f_getRodillaIzquierda();
+void f_setRodillaIzquierda(int aValue);
+int f_getRodillaDerecha();
+void f_setRodillaDerecha(int aValue);
+int f_getCodoIzquierdo();
+void f_setCodoIzquierdo(int aValue);
+int f_getCodoDerecho();
+void f_setCodoDerecho(int aValue);
+
+void c_centraCuello();
+void c_PasoPiernaDerecha();
+void c_PasoHombroDerecho();
+void c_PasoPiernaIzquierda();
+void c_PasoHombroIzquierdo();
+
+int pos = 0;    // variable to store the servo position
+
 void setup() {
-  Serial.begin(9600);
-  pinMode(led, OUTPUT); 
-  pinMode(Trigger, OUTPUT); //pin como salida
-  pinMode(Echo, INPUT);  //pin como entrada
-  digitalWrite(Trigger, LOW);//Inicializamos el pin con 0
-
-  sv_cuello.attach(2); 
-  sv_rodillaDerecha.attach(3); 
-  sv_rodillaIzquierda.attach(4);
-  sv_codoDerecho.attach(5);
-  sv_codoIzquierdo.attach(6);
-  sv_piernaDerecha.attach(7);
-  sv_piernaIzquierda.attach(8);
-  sv_hombroDerecho.attach(9);
-  sv_hombroIzquierdo.attach(10); 
+  sv_cuello.attach(2);  // attaches the servo on pin 9 to the servo object
+  sv_piernaIzquierda.attach(4);  // attaches the servo on pin 9 to the servo object
+  sv_piernaDerecha.attach(5);  // attaches the servo on pin 9 to the servo object
+  sv_hombroIzquierdo.attach(6);  // attaches the servo on pin 9 to the servo object
+  sv_hombroDerecho.attach(7);  // attaches the servo on pin 9 to the servo object
+  sv_rodillaIzquierda.attach(8);  // attaches the servo on pin 9 to the servo object
+  sv_rodillaDerecha.attach(9);  // attaches the servo on pin 9 to the servo object
+  sv_codoIzquierdo.attach(10);  // attaches the servo on pin 9 to the servo object
+  sv_codoDerecho.attach(11);  // attaches the servo on pin 9 to the servo object
 }
 
-//Aqui manejaremos el estado actual del robot
 void loop() {
-  f_entradaSentidos();
+  Serial.begin(9600);
+  //f_pruebaComponentes();
+  c_movimientoCuello();
+  //c_PasoPiernaDerecha();
+  //c_PasoHombroDerecho();
+  //c_PasoPiernaIzquierda();
+  //c_PasoHombroIzquierdo();
 }
 
-//Esta funcion nos sirve para llevar el numero de acciones que realizara el robot dependiendo la cantidad previa mente realizados
-int f_controlDeBateria(int cantidadPila){
-    li_lecturaDePila=li_lecturaDePila+1;
-    return li_lecturaDePila;
-}
-
-int f_lecturaDeBateria(){
-return li_lecturaDePila;
-}
-
-//Desde esta entrada se manejaran los impactos que el medio o espacio provocara que el robot reacio s
-void f_entradaSentidos(){
-if (f_lecturaDeBateria()<=100){
-        digitalWrite(Trigger, HIGH);
-        delayMicroseconds(10);          //Enviamos un pulso de 10us
-        digitalWrite(Trigger, LOW);
-        t = pulseIn(Echo, HIGH); //obtenemos el ancho del pulso
-        d = t/59;             //escalamos el tiempo a una distancia en cm
-      
-          while(d >= 20){
-           f_pasoDerecho();
-           f_pasoIzquierdo();
-          }
-      
-        Serial.print("Distancia: ");
-        Serial.print(d);      //Enviamos serialmente el valor de la distancia
-        Serial.print("cm");
-        Serial.println();
-        delay(100);          //Hacemos una pausa de 100ms
-      
-        //disminuimos la cantidad de moviminetos
-        f_controlDeBateria(1);
-}else{
-  //Se activa el led para dar aviso de bateria baja
-  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);               // wait for a second
-  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);               // wait for a second
-}
-}
-
-
-//Esta funcionalidad es para el caminar del robot
-void f_pasoDerecho(){
-    for (i=40;i<=140;i++){
-        for (j=140;j>=40;j--){
-            sv_piernaDerecha.write(i);
-            sv_piernaIzquierda.write(i);
-            sv_hombroDerecho.write(j);
-            sv_hombroIzquierdo.write(j);
-            {
-               for (i=40;i<=140;i++){
-                  for (j=140;j>=0;j--){
-                    sv_rodillaDerecha.write(j); 
-                    sv_rodillaIzquierda.write(j);
-                    sv_codoDerecho.write(i);
-                    sv_codoIzquierdo.write(i);
-                    }
-                  } 
-            }
-        }
+void c_movimientoCuello(){
+   for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+     sv_cuello.write(pos);              // tell servo to go to position in variable 'pos
+     f_setEstadoCuello(pos);
+     salida=f_getEstadoCuello();
+     Serial.println("La salida es:");
+     Serial.println(salida);
+     delay(30);                       // waits 15ms for the servo to reach the position
+  }
+  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+     sv_cuello.write(pos);              // tell servo to go to position in variable 'pos'
+     f_setEstadoCuello(pos);
+     salida=f_getEstadoCuello();
+     Serial.println("La salida es:");
+     Serial.println(salida);
+     delay(30);                       // waits 15ms for the servo to reach the position
     }
-}
-
-
-void f_pasoIzquierdo(){
-    for (i=40;i<=140;i++){
-        for (j=140;j>=40;j--){
-            sv_piernaDerecha.write(j);
-            sv_piernaIzquierda.write(j);
-            sv_hombroDerecho.write(i);
-            sv_hombroIzquierdo.write(i);
-          {
-               for (i=40;i<=140;i++){
-                  for (j=140;j>=40;j--){
-                    sv_rodillaDerecha.write(i); 
-                    sv_rodillaIzquierda.write(i);
-                    sv_codoDerecho.write(j);
-                    sv_codoIzquierdo.write(j);
-                    }
-                  } 
-            }
-        }
+  }
+void c_PasoPiernaDerecha(){
+    for (pos = 90; pos <= 160; pos += 1) { // goes from 0 degrees to 180 degrees
+      sv_piernaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
     }
+    for (pos = 60; pos <= 130; pos += 1) { // goes from 0 degrees to 180 degrees
+      sv_rodillaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 160; pos >= 90; pos -= 1) { // goes from 0 degrees to 180 degrees
+      sv_piernaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 130; pos >= 60; pos -= 1) { // goes from 0 degrees to 180 degrees
+      sv_rodillaDerecha.write(pos);             // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+   delay(30);
+  }
+void c_PasoPiernaIzquierda(){
+    for (pos = 10; pos <= 100; pos += 1) { // goes from 0 degrees to 180 degrees
+      sv_piernaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 30; pos <= 100; pos += 1) { // goes from 0 degrees to 180 degrees
+      sv_rodillaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 100; pos >= 10; pos -= 1) { // goes from 0 degrees to 180 degrees
+      sv_piernaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 100; pos >= 30; pos -= 1) { // goes from 0 degrees to 180 degrees
+      sv_rodillaIzquierda.write(pos);             // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+   delay(30);
+  }
+void c_PasoHombroDerecho(){
+    for (pos = 0; pos <= 100; pos += 1) { // goes from 0 degrees to 180 degrees
+      sv_hombroDerecho.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 60; pos <= 80; pos += 1) { // goes from 0 degrees to 180 degrees
+      sv_codoDerecho.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 100; pos >= 0; pos -= 1) { // goes from 0 degrees to 180 degrees
+      sv_hombroDerecho.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 80; pos >= 60; pos -= 1) { // goes from 0 degrees to 180 degrees
+      sv_codoDerecho.write(pos);             // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+   delay(30);
+  }
+void c_PasoHombroIzquierdo(){
+    for (pos = 70; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+      sv_hombroIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 90; pos <= 120; pos += 1) { // goes from 0 degrees to 180 degrees
+      sv_codoIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 180; pos >= 70; pos -= 1) { // goes from 0 degrees to 180 degrees
+      sv_hombroIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 120; pos >= 90; pos -= 1) { // goes from 0 degrees to 180 degrees
+      sv_codoIzquierdo.write(pos);             // tell servo to go to position in variable 'pos'
+      delay(30);                       // waits 15ms for the servo to reach the position
+    }
+   delay(30);
+  }
+
+void f_pruebaComponentes(){
+    for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    //sv_cuello.write(pos);              // tell servo to go to position in variable 'pos
+    //sv_piernaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_piernaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_hombroIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_hombroDerecho.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_rodillaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_rodillaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_codoIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_codoDerecho.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(30);                       // waits 15ms for the servo to reach the position
+  }
+  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+    //sv_cuello.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_piernaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_piernaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_hombroIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_hombroDerecho.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_rodillaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_rodillaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_codoIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
+    //sv_codoDerecho.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(30);                       // waits 15ms for the servo to reach the position
+  }
 }
 
-//Esta funcionalidad espara el movimiento de la cabeza
-void f_mueve_cabeza(){
-  sv_cuello.write(0);
-  delay(1000);
-  sv_cuello.write(180);
-  delay(1000);
-  sv_cuello.write(90);
-  delay(10);
+int f_getEstadoCuello(){
+    return e_cuello;
+  }
+void f_setEstadoCuello(int aValue){
+     e_cuello = aValue;
+}
+int f_getPiernaDerecha(){
+    return e_piernaDerecha;
+  }
+void f_setPiernaDerecha(int aValue){
+     e_piernaDerecha = aValue;
+}
+int f_getPiernaIzquierda(){
+    return e_piernaIzquierda;
+  }
+void f_setPiernaIzquierda(int aValue){
+     e_piernaIzquierda = aValue;
+}
+int f_getHombroIzquierdo(){
+    return e_hombroIzquierdo;
+  }
+void f_setHombroIzquierdo(int aValue){
+     e_hombroIzquierdo = aValue;
+}
+int f_getHombroDerecho(){
+    return e_hombroDerecho;
+  }
+void f_setHombroDerecho(int aValue){
+     e_hombroDerecho = aValue;
+}
+int f_getRodillaIzquierda(){
+    return e_rodillaIzquierda;
+  }
+void f_setRodillaIzquierda(int aValue){
+     e_rodillaIzquierda = aValue;
+}
+int f_getRodillaDerecha(){
+    return e_rodillaDerecha;
+  }
+void f_setRodillaDerecha(int aValue){
+     e_rodillaDerecha = aValue;
+}
+int f_getCodoIzquierdo(){
+    return e_codoIzquierdo;
+  }
+void f_setCodoIzquierdo(int aValue){
+     e_codoIzquierdo = aValue;
+}
+int f_getCodoDerecho(){
+    return e_codoDerecho;
+  }
+void f_setCodoDerecho(int aValue){
+     e_codoDerecho = aValue;
 }
