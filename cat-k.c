@@ -1,23 +1,19 @@
 /* Sweep
- by BARRAGAN <http://barraganstudio.com>
- This example code is in the public domain.
-
- modified 8 Nov 2013
- by Scott Fitzgerald
- http://www.arduino.cc/en/Tutorial/Sweep
+ Write by Atlanta Algorithm <http://atlantaalgorithm.com>
+ by Mario Ruiz
 */
 
 #include <Servo.h>
 
-Servo sv_cuello;  // create servo object to control a servo
-Servo sv_piernaDerecha;  // create servo object to control a servo
-Servo sv_piernaIzquierda;  // create servo object to control a servo
-Servo sv_hombroIzquierdo;  // create servo object to control a servo
-Servo sv_hombroDerecho;  // create servo object to control a servo
-Servo sv_rodillaIzquierda;  // create servo object to control a servo
-Servo sv_rodillaDerecha;  // create servo object to control a servo
-Servo sv_codoIzquierdo;  // create servo object to control a servo
-Servo sv_codoDerecho;  // create servo object to control a servo
+Servo sv_cuello;  
+Servo sv_piernaDerecha; 
+Servo sv_piernaIzquierda;  
+Servo sv_hombroIzquierdo;  
+Servo sv_hombroDerecho; 
+Servo sv_rodillaIzquierda; 
+Servo sv_rodillaDerecha;  
+Servo sv_codoIzquierdo;  
+Servo sv_codoDerecho;  
 
 int e_cuello;
 int e_piernaDerecha;
@@ -59,18 +55,32 @@ void c_PasoHombroDerecho();
 void c_PasoPiernaIzquierda();
 void c_PasoHombroIzquierdo();
 
-int pos = 0;    // variable to store the servo position
+int pos = 0; 
+int ida_cuello;
+int vuelta_cuello;
+int ida_pierna_derecha;
+int vuelta_pierna_derecha;
+int ida_rodilla_derecha;
+int vuelta_rodilla_derecha;
+int ida_pierna_izquierda;
+int vuelta_pierna_izquierda;
+int ida_rodilla_izquierda;
+int vuelta_rodilla_izquierda;
+int ida_hombro_derecho;
+int vuelta_hombro_derecho;
+int ida_codo_derecho;
+int vuelta_codo_derecho;
 
 void setup() {
-  sv_cuello.attach(2);  // attaches the servo on pin 9 to the servo object
-  sv_piernaIzquierda.attach(4);  // attaches the servo on pin 9 to the servo object
-  sv_piernaDerecha.attach(5);  // attaches the servo on pin 9 to the servo object
-  sv_hombroIzquierdo.attach(6);  // attaches the servo on pin 9 to the servo object
-  sv_hombroDerecho.attach(7);  // attaches the servo on pin 9 to the servo object
-  sv_rodillaIzquierda.attach(8);  // attaches the servo on pin 9 to the servo object
-  sv_rodillaDerecha.attach(9);  // attaches the servo on pin 9 to the servo object
-  sv_codoIzquierdo.attach(10);  // attaches the servo on pin 9 to the servo object
-  sv_codoDerecho.attach(11);  // attaches the servo on pin 9 to the servo object
+  sv_cuello.attach(2);  
+  sv_piernaIzquierda.attach(4);  
+  sv_piernaDerecha.attach(5);  
+  sv_hombroIzquierdo.attach(6); 
+  sv_hombroDerecho.attach(7);  
+  sv_rodillaIzquierda.attach(8);  
+  sv_rodillaDerecha.attach(9);  
+  sv_codoIzquierdo.attach(10); 
+  sv_codoDerecho.attach(11);  
 }
 
 void loop() {
@@ -84,125 +94,141 @@ void loop() {
 }
 
 void c_movimientoCuello(){
-   for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
-     sv_cuello.write(pos);              // tell servo to go to position in variable 'pos
+   for (pos = ida_cuello; pos <= vuelta_cuello; pos += 1) { 
+     sv_cuello.write(pos);              
      f_setEstadoCuello(pos);
-     salida=f_getEstadoCuello();
-     Serial.println("La salida es:");
-     Serial.println(salida);
-     delay(30);                       // waits 15ms for the servo to reach the position
+     //salida=f_getEstadoCuello();
+     //Serial.println("La salida es:");
+     //Serial.println(salida);
+     delay(30);                       
   }
-  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-     sv_cuello.write(pos);              // tell servo to go to position in variable 'pos'
+  for (pos = vuelta_cuello; pos >= ida_cuello; pos -= 1) { 
+     sv_cuello.write(pos);              
      f_setEstadoCuello(pos);
-     salida=f_getEstadoCuello();
-     Serial.println("La salida es:");
-     Serial.println(salida);
-     delay(30);                       // waits 15ms for the servo to reach the position
+     //salida=f_getEstadoCuello();
+     //Serial.println("La salida es:");
+     //Serial.println(salida);
+     //delay(30);                       
     }
   }
 void c_PasoPiernaDerecha(){
-    for (pos = 90; pos <= 160; pos += 1) { // goes from 0 degrees to 180 degrees
-      sv_piernaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = ida_pierna_derecha; pos <= vuelta_pierna_derecha; pos += 1) { 
+      sv_piernaDerecha.write(pos);          
+      f_setPiernaDerecha(pos);
+      delay(30);                       
     }
-    for (pos = 60; pos <= 130; pos += 1) { // goes from 0 degrees to 180 degrees
-      sv_rodillaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = ida_rodilla_derecha; pos <= vuelta_rodilla_derecha; pos += 1) { 
+      sv_rodillaDerecha.write(pos);         
+      f_setRodillaDerecha(pos);
+      delay(30);                       
     }
-    for (pos = 160; pos >= 90; pos -= 1) { // goes from 0 degrees to 180 degrees
-      sv_piernaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = vuelta_pierna_derecha; pos >= ida_pierna_derecha; pos -= 1) { 
+      sv_piernaDerecha.write(pos); 
+      f_setPiernaDerecha(pos);             
+      delay(30);                       
     }
-    for (pos = 130; pos >= 60; pos -= 1) { // goes from 0 degrees to 180 degrees
-      sv_rodillaDerecha.write(pos);             // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = vuelta_rodilla_derecha; pos >= ida_rodilla_derecha; pos -= 1) { 
+      sv_rodillaDerecha.write(pos);         
+      f_setRodillaDerecha(pos);
+      delay(30);                       
     }
    delay(30);
   }
 void c_PasoPiernaIzquierda(){
-    for (pos = 10; pos <= 100; pos += 1) { // goes from 0 degrees to 180 degrees
-      sv_piernaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = ida_pierna_izquierda; pos <= vuelta_pierna_izquierda; pos += 1) {
+      sv_piernaIzquierda.write(pos);      
+      f_setPiernaIzquierda(pos);
+      delay(30);                       
     }
-    for (pos = 30; pos <= 100; pos += 1) { // goes from 0 degrees to 180 degrees
-      sv_rodillaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = ida_rodilla_izquierda; pos <= vuelta_rodilla_izquierda; pos += 1) {
+      sv_rodillaIzquierda.write(pos);     
+      f_setRodillaIzquierda(pos);
+      delay(30);                       
     }
-    for (pos = 100; pos >= 10; pos -= 1) { // goes from 0 degrees to 180 degrees
-      sv_piernaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = vuelta_pierna_izquierda; pos >= ida_pierna_izquierda; pos -= 1) {
+      sv_piernaIzquierda.write(pos);      
+      f_setPiernaIzquierda(pos);
+      delay(30);                       
     }
-    for (pos = 100; pos >= 30; pos -= 1) { // goes from 0 degrees to 180 degrees
-      sv_rodillaIzquierda.write(pos);             // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = vuelta_rodilla_izquierda; pos >= ida_rodilla_izquierda; pos -= 1) {
+      sv_rodillaIzquierda.write(pos);     
+      f_setRodillaIzquierda(pos);
+      delay(30);                       
     }
    delay(30);
   }
 void c_PasoHombroDerecho(){
-    for (pos = 0; pos <= 100; pos += 1) { // goes from 0 degrees to 180 degrees
-      sv_hombroDerecho.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = ida_hombro_derecho; pos <= vuelta_hombro_derecho; pos += 1) {
+      sv_hombroDerecho.write(pos);       
+      f_setHombroDerecho(pos);
+      delay(30);                      
     }
-    for (pos = 60; pos <= 80; pos += 1) { // goes from 0 degrees to 180 degrees
-      sv_codoDerecho.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = ida_codo_derecho; pos <= vuelta_codo_derecho; pos += 1) {
+      sv_codoDerecho.write(pos);         
+      f_setCodoDerecho(pos);
+      delay(30);                       
     }
-    for (pos = 100; pos >= 0; pos -= 1) { // goes from 0 degrees to 180 degrees
-      sv_hombroDerecho.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = vuelta_hombro_derecho; pos >= ida_hombro_derecho; pos -= 1) {
+      sv_hombroDerecho.write(pos);       
+      f_setHombroDerecho(pos);
+      delay(30);                       
     }
-    for (pos = 80; pos >= 60; pos -= 1) { // goes from 0 degrees to 180 degrees
-      sv_codoDerecho.write(pos);             // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = vuelta_codo_derecho; pos >= ida_codo_derecho; pos -= 1) {
+      sv_codoDerecho.write(pos);         
+      f_setCodoDerecho();
+      delay(30);                       
     }
    delay(30);
   }
 void c_PasoHombroIzquierdo(){
-    for (pos = 70; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
-      sv_hombroIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = ida_hombro_izquierdo; pos <= vuelta_hombro_izquierdo; pos += 1) {
+      sv_hombroIzquierdo.write(pos);      
+      f_setHombroIzquierdo(pos);
+      delay(30);                       
     }
-    for (pos = 90; pos <= 120; pos += 1) { // goes from 0 degrees to 180 degrees
-      sv_codoIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = ida_codo_izquierdo; pos <= vuelta_codo_izquierdo; pos += 1) {
+      sv_codoIzquierdo.write(pos);        
+      f_setCodoIzquierdo(pos);
+      delay(30);                       
     }
-    for (pos = 180; pos >= 70; pos -= 1) { // goes from 0 degrees to 180 degrees
-      sv_hombroIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = vuelta_hombro_izquierdo; pos >= ida_hombro_izquierdo; pos -= 1) {
+      sv_hombroIzquierdo.write(pos);      
+      f_setHombroIzquierdo(pos);
+      delay(30);                        
     }
-    for (pos = 120; pos >= 90; pos -= 1) { // goes from 0 degrees to 180 degrees
-      sv_codoIzquierdo.write(pos);             // tell servo to go to position in variable 'pos'
-      delay(30);                       // waits 15ms for the servo to reach the position
+    for (pos = vuelta_codo_izquierdo; pos >= ida_codo_izquierdo; pos -= 1) {
+      sv_codoIzquierdo.write(pos);        
+      f_setCodoIzquierdo(pos);
+      delay(30);                       
     }
    delay(30);
   }
 
 void f_pruebaComponentes(){
-    for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+    for (pos = 0; pos <= 180; pos += 1) { 
     // in steps of 1 degree
-    //sv_cuello.write(pos);              // tell servo to go to position in variable 'pos
-    //sv_piernaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_piernaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_hombroIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_hombroDerecho.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_rodillaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_rodillaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_codoIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_codoDerecho.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(30);                       // waits 15ms for the servo to reach the position
+    //sv_cuello.write(pos);              
+    //sv_piernaDerecha.write(pos);        
+    //sv_piernaIzquierda.write(pos);      
+    //sv_hombroIzquierdo.write(pos);      
+    //sv_hombroDerecho.write(pos);        
+    //sv_rodillaIzquierda.write(pos);     
+    //sv_rodillaDerecha.write(pos);       
+    //sv_codoIzquierdo.write(pos);        
+    //sv_codoDerecho.write(pos);          
+    delay(30);                       
   }
-  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-    //sv_cuello.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_piernaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_piernaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_hombroIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_hombroDerecho.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_rodillaIzquierda.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_rodillaDerecha.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_codoIzquierdo.write(pos);              // tell servo to go to position in variable 'pos'
-    //sv_codoDerecho.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(30);                       // waits 15ms for the servo to reach the position
+  for (pos = 180; pos >= 0; pos -= 1) { 
+    //sv_cuello.write(pos);              
+    //sv_piernaDerecha.write(pos);        
+    //sv_piernaIzquierda.write(pos);      
+    //sv_hombroIzquierdo.write(pos);      
+    //sv_hombroDerecho.write(pos);        
+    //sv_rodillaIzquierda.write(pos);     
+    //sv_rodillaDerecha.write(pos);       
+    //sv_codoIzquierdo.write(pos);        
+    //sv_codoDerecho.write(pos);          
+    delay(30);                       
   }
 }
 
@@ -260,3 +286,6 @@ int f_getCodoDerecho(){
 void f_setCodoDerecho(int aValue){
      e_codoDerecho = aValue;
 }
+
+
+
