@@ -139,7 +139,7 @@ void c_movimientoCuello(){
      //salida=f_getEstadoCuello();
      //Serial.println("La salida es:");
      //Serial.println(salida);
-     delay(30);                       
+     delayMicroseconds(300);                       
   }
   for (pos = vuelta_cuello; pos >= ida_cuello; pos -= 1) { 
      sv_cuello.write(pos);              
@@ -155,96 +155,96 @@ void c_PasoPiernaDerecha(){
     for (pos = e_ida_pierna_derecha; pos <= e_vuelta_pierna_derecha; pos += 1) { 
       sv_piernaDerecha.write(pos);          
       f_setPiernaDerecha(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
     for (pos = e_ida_rodilla_derecha; pos <= e_vuelta_rodilla_derecha; pos += 1) { 
       sv_rodillaDerecha.write(pos);         
       f_setRodillaDerecha(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
     for (pos = e_vuelta_pierna_derecha; pos >= e_ida_pierna_derecha; pos -= 1) { 
       sv_piernaDerecha.write(pos); 
       f_setPiernaDerecha(pos);             
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
     for (pos = e_vuelta_rodilla_derecha; pos >= e_ida_rodilla_derecha; pos -= 1) { 
       sv_rodillaDerecha.write(pos);         
       f_setRodillaDerecha(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
-   delay(30);
+   delayMicroseconds(300);
   }
   
 void c_PasoPiernaIzquierda(){
     for (pos = e_ida_pierna_izquierda; pos <= e_vuelta_pierna_izquierda; pos += 1) {
       sv_piernaIzquierda.write(pos);      
       f_setPiernaIzquierda(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
     for (pos = e_ida_rodilla_izquierda; pos <= e_vuelta_rodilla_izquierda; pos += 1) {
       sv_rodillaIzquierda.write(pos);     
       f_setRodillaIzquierda(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
     for (pos = e_vuelta_pierna_izquierda; pos >= e_ida_pierna_izquierda; pos -= 1) {
       sv_piernaIzquierda.write(pos);      
       f_setPiernaIzquierda(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
     for (pos = e_vuelta_rodilla_izquierda; pos >= e_ida_rodilla_izquierda; pos -= 1) {
       sv_rodillaIzquierda.write(pos);     
       f_setRodillaIzquierda(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
-   delay(30);
+   delayMicroseconds(300);
   }
   
 void c_PasoHombroDerecho(){
     for (pos = e_ida_hombro_derecho; pos <= e_vuelta_hombro_derecho; pos += 1) {
       sv_hombroDerecho.write(pos);       
       f_setHombroDerecho(pos);
-      delay(30);                      
+      delayMicroseconds(300);                      
     }
     for (pos = e_ida_codo_derecho; pos <= e_vuelta_codo_derecho; pos += 1) {
       sv_codoDerecho.write(pos);         
       f_setCodoDerecho(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
     for (pos = e_vuelta_hombro_derecho; pos >= e_ida_hombro_derecho; pos -= 1) {
       sv_hombroDerecho.write(pos);       
       f_setHombroDerecho(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
     for (pos = e_vuelta_codo_derecho; pos >= e_ida_codo_derecho; pos -= 1) {
       sv_codoDerecho.write(pos);         
       f_setCodoDerecho();
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
-   delay(30);
+   delayMicroseconds(300);
   }
   
 void c_PasoHombroIzquierdo(){
     for (pos = e_ida_hombro_izquierdo; pos <= e_vuelta_hombro_izquierdo; pos += 1) {
       sv_hombroIzquierdo.write(pos);      
       f_setHombroIzquierdo(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
     for (pos = e_ida_codo_izquierdo; pos <= e_vuelta_codo_izquierdo; pos += 1) {
       sv_codoIzquierdo.write(pos);        
       f_setCodoIzquierdo(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
     for (pos = e_vuelta_hombro_izquierdo; pos >= e_ida_hombro_izquierdo; pos -= 1) {
       sv_hombroIzquierdo.write(pos);      
       f_setHombroIzquierdo(pos);
-      delay(30);                        
+      delayMicroseconds(300);                        
     }
     for (pos = e_vuelta_codo_izquierdo; pos >= e_ida_codo_izquierdo; pos -= 1) {
       sv_codoIzquierdo.write(pos);        
       f_setCodoIzquierdo(pos);
-      delay(30);                       
+      delayMicroseconds(300);                       
     }
-   delay(30);
+   delayMicroseconds(300);
   }
 
 void f_pruebaComponentes(){
@@ -259,7 +259,7 @@ void f_pruebaComponentes(){
     //sv_rodillaDerecha.write(pos);       
     //sv_codoIzquierdo.write(pos);        
     //sv_codoDerecho.write(pos);          
-    delay(30);                       
+    delayMicroseconds(300);                       
   }
   for (pos = 180; pos >= 0; pos -= 1) { 
     //sv_cuello.write(pos);              
@@ -271,7 +271,7 @@ void f_pruebaComponentes(){
     //sv_rodillaDerecha.write(pos);       
     //sv_codoIzquierdo.write(pos);        
     //sv_codoDerecho.write(pos);          
-    delay(30);                       
+    delayMicroseconds(300);                       
   }
 }
 
