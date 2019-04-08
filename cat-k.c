@@ -24,6 +24,24 @@ int e_rodillaIzquierda;
 int e_rodillaDerecha;
 int e_codoIzquierdo;
 int e_codoDerecho;
+int e_ida_cuello;
+int e_vuelta_cuello;
+int e_ida_pierna_derecha = 90;
+int e_vuelta_pierna_derecha = 160;
+int e_ida_rodilla_derecha = 60;
+int e_vuelta_rodilla_derecha = 130;
+int e_ida_pierna_izquierda = 10;
+int e_vuelta_pierna_izquierda = 100;
+int e_ida_rodilla_izquierda = 30;
+int e_vuelta_rodilla_izquierda = 100;
+int e_ida_hombro_derecho = 0;
+int e_vuelta_hombro_derecho = 100;
+int e_ida_codo_derecho = 60;
+int e_vuelta_codo_derecho = 80;
+int e_ida_hombro_izquierdo = 70;
+int e_vuelta_hombro_izquierdo = 180;
+int e_ida_codo_izquierdo = 90;
+int e_vuelta_codo_izquierdo = 120;
 int salida;
 
 void f_pruebaComponentes();
@@ -49,6 +67,40 @@ void f_setCodoIzquierdo(int aValue);
 int f_getCodoDerecho();
 void f_setCodoDerecho(int aValue);
 
+
+int f_getIdaPiernaDerecha();
+void f_setIdaPiernaDerecha(int aValue);
+int f_getVueltaPiernaDerecha();
+void f_setVueltaPiernaDerecha(int aValue);
+int f_getIdaRodillaDerecha();
+void f_setIdaRodillaDerecha(int aValue);
+int f_getVueltaRodillaDerecha();
+void f_setVueltaRodillaDerecha(int aValue);
+int f_getIdaPiernaIzquierda();
+void f_setIdaPiernaIzquierda(int aValue);
+int f_getVueltaPiernaIzquierda();
+void f_setVueltaPiernaIzquierda(int aValue);
+int f_getIdaRodillaIzquierda();
+void f_setIdaRodillaIzquierda(int aValue);
+int f_getVueltaRodillaIzquierda();
+void f_setVueltaRodillaIzquierda(int aValue);
+int f_getIdaHombroDerecho();
+void f_setIdaHombroDerecho(int aValue);
+int f_getVueltaHombroDerecho();
+void f_setVueltaHombroDerecho(int aValue);
+int f_getIdaCodoDerecho();
+void f_setIdaCodoDerecho(int aValue);
+int f_getVueltaCodoDerecho();
+void f_setVueltaCodoDerecho(int aValue);
+int f_getIdaHombroIzquierdo();
+void f_setIdaHombroIzquierdo(int aValue);
+int f_getVueltaHombroIzquierdo();
+void f_setVueltaHombroIzquierdo(int aValue);
+int f_getIdaCodoIzquierdo();
+void f_setIdaCodoIzquierdo(int aValue);
+int f_getVueltaCodoIzquierdo();
+void f_setVueltaCodoIzquierdo(int aValue);
+
 void c_centraCuello();
 void c_PasoPiernaDerecha();
 void c_PasoHombroDerecho();
@@ -56,24 +108,7 @@ void c_PasoPiernaIzquierda();
 void c_PasoHombroIzquierdo();
 
 int pos = 0; 
-int ida_cuello;
-int vuelta_cuello;
-int ida_pierna_derecha = 90;
-int vuelta_pierna_derecha = 160;
-int ida_rodilla_derecha = 60;
-int vuelta_rodilla_derecha = 130;
-int ida_pierna_izquierda = 10;
-int vuelta_pierna_izquierda = 100;
-int ida_rodilla_izquierda = 30;
-int vuelta_rodilla_izquierda = 100;
-int ida_hombro_derecho = 0;
-int vuelta_hombro_derecho = 100;
-int ida_codo_derecho = 60;
-int vuelta_codo_derecho = 80;
-int ida_hombro_izquierdo = 70;
-int vuelta_hombro_izquierdo = 180;
-int ida_codo_izquierdo = 90;
-int vuelta_codo_izquierdo = 120;
+
 
 void setup() {
   sv_cuello.attach(2);  
@@ -115,92 +150,96 @@ void c_movimientoCuello(){
      //delay(30);                       
     }
   }
+  
 void c_PasoPiernaDerecha(){
-    for (pos = ida_pierna_derecha; pos <= vuelta_pierna_derecha; pos += 1) { 
+    for (pos = e_ida_pierna_derecha; pos <= e_vuelta_pierna_derecha; pos += 1) { 
       sv_piernaDerecha.write(pos);          
       f_setPiernaDerecha(pos);
       delay(30);                       
     }
-    for (pos = ida_rodilla_derecha; pos <= vuelta_rodilla_derecha; pos += 1) { 
+    for (pos = e_ida_rodilla_derecha; pos <= e_vuelta_rodilla_derecha; pos += 1) { 
       sv_rodillaDerecha.write(pos);         
       f_setRodillaDerecha(pos);
       delay(30);                       
     }
-    for (pos = vuelta_pierna_derecha; pos >= ida_pierna_derecha; pos -= 1) { 
+    for (pos = e_vuelta_pierna_derecha; pos >= e_ida_pierna_derecha; pos -= 1) { 
       sv_piernaDerecha.write(pos); 
       f_setPiernaDerecha(pos);             
       delay(30);                       
     }
-    for (pos = vuelta_rodilla_derecha; pos >= ida_rodilla_derecha; pos -= 1) { 
+    for (pos = e_vuelta_rodilla_derecha; pos >= e_ida_rodilla_derecha; pos -= 1) { 
       sv_rodillaDerecha.write(pos);         
       f_setRodillaDerecha(pos);
       delay(30);                       
     }
    delay(30);
   }
+  
 void c_PasoPiernaIzquierda(){
-    for (pos = ida_pierna_izquierda; pos <= vuelta_pierna_izquierda; pos += 1) {
+    for (pos = e_ida_pierna_izquierda; pos <= e_vuelta_pierna_izquierda; pos += 1) {
       sv_piernaIzquierda.write(pos);      
       f_setPiernaIzquierda(pos);
       delay(30);                       
     }
-    for (pos = ida_rodilla_izquierda; pos <= vuelta_rodilla_izquierda; pos += 1) {
+    for (pos = e_ida_rodilla_izquierda; pos <= e_vuelta_rodilla_izquierda; pos += 1) {
       sv_rodillaIzquierda.write(pos);     
       f_setRodillaIzquierda(pos);
       delay(30);                       
     }
-    for (pos = vuelta_pierna_izquierda; pos >= ida_pierna_izquierda; pos -= 1) {
+    for (pos = e_vuelta_pierna_izquierda; pos >= e_ida_pierna_izquierda; pos -= 1) {
       sv_piernaIzquierda.write(pos);      
       f_setPiernaIzquierda(pos);
       delay(30);                       
     }
-    for (pos = vuelta_rodilla_izquierda; pos >= ida_rodilla_izquierda; pos -= 1) {
+    for (pos = e_vuelta_rodilla_izquierda; pos >= e_ida_rodilla_izquierda; pos -= 1) {
       sv_rodillaIzquierda.write(pos);     
       f_setRodillaIzquierda(pos);
       delay(30);                       
     }
    delay(30);
   }
+  
 void c_PasoHombroDerecho(){
-    for (pos = ida_hombro_derecho; pos <= vuelta_hombro_derecho; pos += 1) {
+    for (pos = e_ida_hombro_derecho; pos <= e_vuelta_hombro_derecho; pos += 1) {
       sv_hombroDerecho.write(pos);       
       f_setHombroDerecho(pos);
       delay(30);                      
     }
-    for (pos = ida_codo_derecho; pos <= vuelta_codo_derecho; pos += 1) {
+    for (pos = e_ida_codo_derecho; pos <= e_vuelta_codo_derecho; pos += 1) {
       sv_codoDerecho.write(pos);         
       f_setCodoDerecho(pos);
       delay(30);                       
     }
-    for (pos = vuelta_hombro_derecho; pos >= ida_hombro_derecho; pos -= 1) {
+    for (pos = e_vuelta_hombro_derecho; pos >= e_ida_hombro_derecho; pos -= 1) {
       sv_hombroDerecho.write(pos);       
       f_setHombroDerecho(pos);
       delay(30);                       
     }
-    for (pos = vuelta_codo_derecho; pos >= ida_codo_derecho; pos -= 1) {
+    for (pos = e_vuelta_codo_derecho; pos >= e_ida_codo_derecho; pos -= 1) {
       sv_codoDerecho.write(pos);         
       f_setCodoDerecho();
       delay(30);                       
     }
    delay(30);
   }
+  
 void c_PasoHombroIzquierdo(){
-    for (pos = ida_hombro_izquierdo; pos <= vuelta_hombro_izquierdo; pos += 1) {
+    for (pos = e_ida_hombro_izquierdo; pos <= e_vuelta_hombro_izquierdo; pos += 1) {
       sv_hombroIzquierdo.write(pos);      
       f_setHombroIzquierdo(pos);
       delay(30);                       
     }
-    for (pos = ida_codo_izquierdo; pos <= vuelta_codo_izquierdo; pos += 1) {
+    for (pos = e_ida_codo_izquierdo; pos <= e_vuelta_codo_izquierdo; pos += 1) {
       sv_codoIzquierdo.write(pos);        
       f_setCodoIzquierdo(pos);
       delay(30);                       
     }
-    for (pos = vuelta_hombro_izquierdo; pos >= ida_hombro_izquierdo; pos -= 1) {
+    for (pos = e_vuelta_hombro_izquierdo; pos >= e_ida_hombro_izquierdo; pos -= 1) {
       sv_hombroIzquierdo.write(pos);      
       f_setHombroIzquierdo(pos);
       delay(30);                        
     }
-    for (pos = vuelta_codo_izquierdo; pos >= ida_codo_izquierdo; pos -= 1) {
+    for (pos = e_vuelta_codo_izquierdo; pos >= e_ida_codo_izquierdo; pos -= 1) {
       sv_codoIzquierdo.write(pos);        
       f_setCodoIzquierdo(pos);
       delay(30);                       
@@ -235,6 +274,8 @@ void f_pruebaComponentes(){
     delay(30);                       
   }
 }
+
+////////////////////////////////////////////////
 
 int f_getEstadoCuello(){
     return e_cuello;
@@ -291,5 +332,103 @@ void f_setCodoDerecho(int aValue){
      e_codoDerecho = aValue;
 }
 
+////////////////////////////////////////
+
+int f_getIdaPiernaDerecha(){
+    return e_ida_pierna_derecha;
+  }
+void f_setIdaPiernaDerecha(int aValue){
+     e_ida_pierna_derecha = aValue;
+}
+int f_getVueltaPiernaDerecha(){
+    return e_vuelta_pierna_derecha;
+  }
+void f_setVueltaPiernaDerecha(int aValue){
+     e_vuelta_pierna_derecha = aValue;
+}
+int f_getIdaRodillaDerecha(){
+    return e_ida_rodilla_derecha;
+  }
+void f_setIdaRodillaDerecha(int aValue){
+     e_ida_rodilla_derecha = aValue;
+}
+int f_getVueltaRodillaDerecha(){
+    return e_vuelta_rodilla_derecha;
+  }
+void f_setVueltaRodillaDerecha(int aValue){
+     e_vuelta_rodilla_derecha = aValue;
+}
+int f_getIdaPiernaIzquierda(){
+    return e_ida_pierna_izquierda;
+  }
+void f_setIdaPiernaIzquierda(int aValue){
+     e_ida_pierna_izquierda = aValue;
+}
+int f_getVueltaPiernaIzquierda(){
+    return e_vuelta_pierna_izquierda;
+  }
+void f_setVueltaPiernaIzquierda(int aValue){
+     e_vuelta_pierna_izquierda = aValue;
+}
+int f_getIdaRodillaIzquierda(){
+    return e_ida_rodilla_izquierda;
+  }
+void f_setIdaRodillaIzquierda(int aValue){
+     e_ida_rodilla_izquierda = aValue;
+}
+int f_getVueltaRodillaIzquierda(){
+    return e_vuelta_rodilla_izquierda;
+  }
+void f_setVueltaRodillaIzquierda(int aValue){
+     e_vuelta_rodilla_izquierda = aValue;
+}
+int f_getIdaHombroDerecho(){
+    return e_ida_hombro_derecho;
+  }
+void f_setIdaHombroDerecho(int aValue){
+     e_ida_hombro_derecho = aValue;
+}
+int f_getVueltaHombroDerecho(){
+    return e_vuelta_hombro_derecho;
+  }
+void f_setVueltaHombroDerecho(int aValue){
+     e_vuelta_hombro_derecho = aValue;
+}
+int f_getIdaCodoDerecho(){
+    return e_ida_codo_derecho;
+  }
+void f_setIdaCodoDerecho(int aValue){
+     e_ida_codo_derecho = aValue;
+}
+int f_getVueltaCodoDerecho(){
+    return e_vuelta_codo_derecho;
+  }
+void f_setVueltaCodoDerecho(int aValue){
+     e_vuelta_codo_derecho = aValue;
+}
+int f_getIdaHombroIzquierdo(){
+    return e_ida_hombro_izquierdo;
+  }
+void f_setIdaHombroIzquierdo(int aValue){
+     e_ida_hombro_izquierdo = aValue;
+}
+int f_getVueltaHombroIzquierdo(){
+    return e_Vuelta_hombro_izquierdo;
+  }
+void f_setVueltaHombroIzquierdo(int aValue){
+     e_vuelta_hombro_izquierdo = aValue;
+}
+int f_getIdaCodoIzquierdo(){
+    return e_ida_codo_izquierdo;
+  }
+void f_setIdaCodoIzquierdo(int aValue){
+     e_ida_codo_izquierdo = aValue;
+}
+int f_getVueltaCodoIzquierdo(){
+    return e_Vuelta_codo_izquierdo;
+  }
+void f_setVueltaCodoIzquierdo(int aValue){
+     e_vuelta_codo_izquierdo = aValue;
+}
 
 
