@@ -109,6 +109,11 @@ void c_PasoHombroIzquierdo();
 
 int pos = 0; 
 
+const int pinecho = 12;
+const int pintrigger = 13;
+
+unsigned int tiempo, distancia;
+
 
 void setup() {
   sv_cuello.attach(2);  
@@ -119,17 +124,45 @@ void setup() {
   sv_rodillaIzquierda.attach(8);  
   sv_rodillaDerecha.attach(9);  
   sv_codoIzquierdo.attach(10); 
-  sv_codoDerecho.attach(11);  
+  sv_codoDerecho.attach(11); 
+  pinMode(pinecho, INPUT);
+  pinMode(pintrigger, OUTPUT);
 }
 
 void loop() {
   Serial.begin(9600);
   //f_pruebaComponentes();
-  c_movimientoCuello();
+  
   //c_PasoPiernaDerecha();
   //c_PasoHombroDerecho();
   //c_PasoPiernaIzquierda();
   //c_PasoHombroIzquierdo();
+  
+    // ENVIAR PULSO DE DISPARO EN EL PIN "TRIGGER"
+  digitalWrite(pintrigger, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pintrigger, HIGH);
+  // EL PULSO DURA AL MENOS 10 uS EN ESTADO ALTO
+  delayMicroseconds(10);
+  digitalWrite(pintrigger, LOW);
+
+  // MEDIR EL TIEMPO EN ESTADO ALTO DEL PIN "ECHO" EL PULSO ES PROPORCIONAL A LA DISTANCIA MEDIDA
+  tiempo = pulseIn(pinecho, HIGH);
+
+  // LA VELOCIDAD DEL SONIDO ES DE 340 M/S O 29 MICROSEGUNDOS POR CENTIMETRO
+  // DIVIDIMOS EL TIEMPO DEL PULSO ENTRE 58, TIEMPO QUE TARDA RECORRER IDA Y VUELTA UN CENTIMETRO LA ONDA SONORA
+  distancia = tiempo / 58;
+
+  // ENVIAR EL RESULTADO AL MONITOR SERIAL
+  Serial.print(distancia);
+  Serial.println(" cm");
+  delay(200);
+
+  do{
+	  c_movimientoCuello();
+  }
+  while(distancia <= 15)
+  
 }
 
 void c_movimientoCuello(){
