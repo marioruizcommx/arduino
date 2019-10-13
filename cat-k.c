@@ -33,11 +33,11 @@ void setup() {
   sv_piernaIzquierda.attach(4);
   sv_piernaDerecha.attach(5);
   sv_hombroIzquierdo.attach(6);
-  sv_hombroDerecho.attach(11);
+  sv_hombroDerecho.attach(7);
   sv_rodillaIzquierda.attach(8);
   sv_rodillaDerecha.attach(9);
   sv_codoIzquierdo.attach(10);
-  sv_codoDerecho.attach(7);
+  sv_codoDerecho.attach(11);
   pinMode(pinecho, INPUT);
   pinMode(pintrigger, OUTPUT);
 }
@@ -92,32 +92,152 @@ void m_inicio_operativo() {
 //////////////////////////////
 
 void f_pruebaComponentes() {
+    //posicion cero
+    sv_piernaDerecha.write(90);
+    sv_piernaIzquierda.write(90);
+    sv_hombroIzquierdo.write(90);
+    sv_hombroDerecho.write(90);
+    sv_rodillaIzquierda.write(0);
+    sv_rodillaDerecha.write(180);
+    sv_codoIzquierdo.write(0);
+    sv_codoDerecho.write(180);
 
-    sv_piernaDerecha.write(60);
-    delay(1000);
-    sv_piernaIzquierda.write(120);
+    //posicion gusano
+    sv_piernaDerecha.write(120);
+    delay(500);
+    sv_piernaIzquierda.write(60);
+    delay(500);
+    sv_hombroIzquierdo.write(120);
+    delay(500);
+    sv_hombroDerecho.write(60);
+    delay(500);
+    sv_rodillaIzquierda.write(150);
+    delay(500);
+    sv_rodillaDerecha.write(30);
+    delay(500);
+    sv_codoIzquierdo.write(30);
+    delay(500);
+    sv_codoDerecho.write(150);
+    delay(500);
+
+    //se arrodilla la parte derecha
+    sv_rodillaDerecha.write(0);
+    delay(500);
+    sv_codoDerecho.write(180);
+    delay(500);
+    sv_piernaDerecha.write(140);
+    delay(500);
+    sv_hombroDerecho.write(40);
+    delay(500);
+
+    //patada larga
+    sv_piernaIzquierda.write(80);
+    delay(500);
+    sv_piernaIzquierda.write(0);
+    delay(500);
+    sv_piernaIzquierda.write(60);
+    delay(500);
+
+    //gataso izquierdo
+    sv_codoIzquierdo.write(0);
+    delay(500);
+    sv_hombroIzquierdo.write(60);
+    delay(500);
+    sv_codoIzquierdo.write(40);
+    delay(500);
+    sv_hombroIzquierdo.write(140);
     delay(1000);
     sv_hombroIzquierdo.write(120);
-    delay(1000);
-    sv_hombroDerecho.write(60);
-    delay(1000);
-    sv_rodillaIzquierda.write(30);
-    delay(1000);
-    sv_rodillaDerecha.write(150);
-    delay(1000);
+    delay(500);
     sv_codoIzquierdo.write(30);
+    delay(500);
+
+    //lado derecho regresa a posicion
+    sv_piernaDerecha.write(120);
+    delay(500);
+    sv_hombroDerecho.write(60);
+    delay(500);
+    sv_rodillaDerecha.write(30);
+    delay(500);
+    sv_codoDerecho.write(150);
+    delay(500);
+
+    //rodilla izquierda se inclina
+    sv_rodillaIzquierda.write(180);
+    delay(500);
+    sv_codoIzquierdo.write(0);
+    delay(500);
+    sv_piernaIzquierda.write(40);
+    delay(500);
+    sv_hombroIzquierdo.write(140);
+    delay(500);
+    
+    //patada larga
+    sv_piernaDerecha.write(100);
+    delay(500);
+    sv_piernaDerecha.write(180);
+    delay(500);
+    sv_piernaDerecha.write(120);
     delay(1000);
+
+    //gataso derecho
+
+    sv_codoDerecho.write(180);
+    delay(500);
+    sv_hombroDerecho.write(140);
+    delay(500);
+    sv_codoDerecho.write(130);
+    delay(500);
+    sv_hombroDerecho.write(40);    
+    delay(500);
+    sv_codoDerecho.write(180);
+    delay(500);
+    sv_hombroDerecho.write(60);
+    delay(500);
+    sv_rodillaDerecha.write(30);
+    delay(500);
+    sv_codoDerecho.write(150);
+    delay(500);
+    
+    //izquierdo regresa a posicion
+    sv_piernaIzquierda.write(60);
+    delay(500);
+    sv_hombroIzquierdo.write(120);
+    delay(500);
+    sv_rodillaIzquierda.write(150);
+    delay(500);
+    sv_codoIzquierdo.write(30);
+    delay(500);
+
+/*
+    sv_piernaDerecha.write(120);
+    delay(500);
+    sv_piernaIzquierda.write(60);
+    delay(500);
+    sv_hombroIzquierdo.write(120);
+    delay(500);
+    sv_hombroDerecho.write(60);
+    delay(500);
+    sv_rodillaIzquierda.write(150);
+    delay(500);
+    sv_rodillaDerecha.write(30);
+    delay(500);
+    sv_codoIzquierdo.write(30);
+    delay(500);
     sv_codoDerecho.write(150);
 delay(1000);
-/////////////////////////////////
+*/
+
+////////////////////////////////
+/*
     sv_codoDerecho.write(180);
-delay(1000);
+delay(500);
     sv_hombroDerecho.write(140);
-delay(1000);
+delay(500);
     sv_codoDerecho.write(130);
-delay(1000);
+delay(500);
     sv_hombroDerecho.write(40);    
-delay(1000);
+delay(500);
     sv_codoDerecho.write(180);
 //////////////////////////////////
 delay(1000);
@@ -152,7 +272,7 @@ delay(1000);
     sv_piernaDerecha.write(60);
 delay(1000);    
     sv_rodillaDerecha.write(180);
-
+*/
 
 /*  posicion 0
     sv_piernaDerecha.write(90);
@@ -216,4 +336,3 @@ delay(1000);
   }
   */
 }
-
