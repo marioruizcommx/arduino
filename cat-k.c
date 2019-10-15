@@ -93,6 +93,8 @@ void m_inicio_operativo() {
 
 void f_pruebaComponentes() {
     //posicion cero
+    
+    /*
     sv_piernaDerecha.write(90);
     sv_piernaIzquierda.write(90);
     sv_hombroIzquierdo.write(90);
@@ -101,238 +103,95 @@ void f_pruebaComponentes() {
     sv_rodillaDerecha.write(180);
     sv_codoIzquierdo.write(0);
     sv_codoDerecho.write(180);
-
-    //posicion gusano
-    sv_piernaDerecha.write(120);
-    delay(500);
-    sv_piernaIzquierda.write(60);
-    delay(500);
-    sv_hombroIzquierdo.write(120);
-    delay(500);
-    sv_hombroDerecho.write(60);
-    delay(500);
-    sv_rodillaIzquierda.write(150);
-    delay(500);
-    sv_rodillaDerecha.write(30);
-    delay(500);
-    sv_codoIzquierdo.write(30);
-    delay(500);
-    sv_codoDerecho.write(150);
-    delay(500);
-
-    //se arrodilla la parte derecha
-    sv_rodillaDerecha.write(0);
-    delay(500);
-    sv_codoDerecho.write(180);
-    delay(500);
-    sv_piernaDerecha.write(140);
-    delay(500);
-    sv_hombroDerecho.write(40);
-    delay(500);
-
-    //patada larga
-    sv_piernaIzquierda.write(80);
-    delay(500);
-    sv_piernaIzquierda.write(0);
-    delay(500);
-    sv_piernaIzquierda.write(60);
-    delay(500);
-
-    //gataso izquierdo
-    sv_codoIzquierdo.write(0);
-    delay(500);
-    sv_hombroIzquierdo.write(60);
-    delay(500);
-    sv_codoIzquierdo.write(40);
-    delay(500);
-    sv_hombroIzquierdo.write(140);
-    delay(1000);
-    sv_hombroIzquierdo.write(120);
-    delay(500);
-    sv_codoIzquierdo.write(30);
-    delay(500);
-
-    //lado derecho regresa a posicion
-    sv_piernaDerecha.write(120);
-    delay(500);
-    sv_hombroDerecho.write(60);
-    delay(500);
-    sv_rodillaDerecha.write(30);
-    delay(500);
-    sv_codoDerecho.write(150);
-    delay(500);
-
-    //rodilla izquierda se inclina
-    sv_rodillaIzquierda.write(180);
-    delay(500);
-    sv_codoIzquierdo.write(0);
-    delay(500);
-    sv_piernaIzquierda.write(40);
-    delay(500);
-    sv_hombroIzquierdo.write(140);
-    delay(500);
     
-    //patada larga
-    sv_piernaDerecha.write(100);
+        sv_piernaDerecha.write(45);
+    sv_piernaIzquierda.write(135);
+    sv_hombroIzquierdo.write(135);
+    sv_hombroDerecho.write(45);
     delay(500);
-    sv_piernaDerecha.write(180);
+    sv_piernaDerecha.write(135);
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(45);
+    sv_hombroDerecho.write(135);
     delay(500);
-    sv_piernaDerecha.write(120);
-    delay(1000);
-
-    //gataso derecho
-
-    sv_codoDerecho.write(180);
-    delay(500);
-    sv_hombroDerecho.write(140);
-    delay(500);
-    sv_codoDerecho.write(130);
-    delay(500);
-    sv_hombroDerecho.write(40);    
-    delay(500);
-    sv_codoDerecho.write(180);
-    delay(500);
-    sv_hombroDerecho.write(60);
-    delay(500);
-    sv_rodillaDerecha.write(30);
-    delay(500);
-    sv_codoDerecho.write(150);
-    delay(500);
-    
-    //izquierdo regresa a posicion
-    sv_piernaIzquierda.write(60);
-    delay(500);
-    sv_hombroIzquierdo.write(120);
-    delay(500);
-    sv_rodillaIzquierda.write(150);
-    delay(500);
-    sv_codoIzquierdo.write(30);
-    delay(500);
-
-/*
-    sv_piernaDerecha.write(120);
-    delay(500);
-    sv_piernaIzquierda.write(60);
-    delay(500);
-    sv_hombroIzquierdo.write(120);
-    delay(500);
-    sv_hombroDerecho.write(60);
-    delay(500);
-    sv_rodillaIzquierda.write(150);
-    delay(500);
-    sv_rodillaDerecha.write(30);
-    delay(500);
-    sv_codoIzquierdo.write(30);
-    delay(500);
-    sv_codoDerecho.write(150);
-delay(1000);
 */
 
-////////////////////////////////
-/*
-    sv_codoDerecho.write(180);
-delay(500);
-    sv_hombroDerecho.write(140);
-delay(500);
-    sv_codoDerecho.write(130);
-delay(500);
-    sv_hombroDerecho.write(40);    
-delay(500);
-    sv_codoDerecho.write(180);
-//////////////////////////////////
-delay(1000);
-    sv_codoIzquierdo.write(0);
-delay(1000);
-    sv_hombroIzquierdo.write(40);
-delay(1000);
-    sv_codoIzquierdo.write(40);
-delay(1000);
-    sv_hombroIzquierdo.write(140);
-delay(1000);
-    sv_codoIzquierdo.write(0);
-//////////////////////////////////
-delay(1000);
+    sv_piernaDerecha.write(45);
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(45);
+    sv_hombroDerecho.write(45);
+
+
+    sv_piernaDerecha.write(135);
+    sv_piernaIzquierda.write(135);
+    sv_hombroIzquierdo.write(135);
+    sv_hombroDerecho.write(135);
+
+
+    
+    
+    /*
+    for (pos = 1; pos <= 5; pos += 1) {
+    sv_piernaDerecha.write(45);
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(45);
+    sv_hombroDerecho.write(45);
     sv_rodillaIzquierda.write(0);
-delay(1000);
-    sv_piernaIzquierda.write(60);
-delay(1000);
-    sv_rodillaIzquierda.write(90);
-delay(1000);
-    sv_piernaIzquierda.write(120);
-delay(1000);
-    sv_rodillaIzquierda.write(0);
-//////////////////////////////////
-delay(1000);
     sv_rodillaDerecha.write(180);
-delay(1000);
-    sv_piernaDerecha.write(120);
-delay(1000);    
+    sv_codoIzquierdo.write(0);
+    sv_codoDerecho.write(180);
+
+    sv_piernaDerecha.write(135);
+    sv_piernaIzquierda.write(135);
+    sv_hombroIzquierdo.write(135);
+    sv_hombroDerecho.write(135);
+    sv_rodillaIzquierda.write(0);
+    sv_rodillaDerecha.write(180);
+    sv_codoIzquierdo.write(0);
+    sv_codoDerecho.write(180);
+    }
+    */
+    
+    /*
+    for (pos = 1; pos <= 5; pos += 1) {
+        
+    sv_piernaDerecha.write(135);
+    sv_hombroDerecho.write(45);
+    sv_codoDerecho.write(180);
+    delay(500);
+    sv_rodillaDerecha.write(135);
+    delay(500);
     sv_rodillaDerecha.write(90);
-delay(1000);    
-    sv_piernaDerecha.write(60);
-delay(1000);    
-    sv_rodillaDerecha.write(180);
-*/
-
-/*  posicion 0
-    sv_piernaDerecha.write(90);
-    sv_piernaIzquierda.write(90);
-    sv_hombroIzquierdo.write(90);
-    sv_hombroDerecho.write(90);
-    sv_rodillaIzquierda.write(0);
-    sv_rodillaDerecha.write(180);
-    sv_codoIzquierdo.write(0);
-    sv_codoDerecho.write(180);
-
-    //pie
-
-    sv_piernaDerecha.write(60);
-    sv_piernaIzquierda.write(120);
-    sv_hombroIzquierdo.write(120);
-    sv_hombroDerecho.write(60);
-    sv_rodillaIzquierda.write(30);
-    sv_rodillaDerecha.write(150);
-    sv_codoIzquierdo.write(30);
-    sv_codoDerecho.write(150);
-
-    //primer paso
-    sv_piernaDerecha.write(50);
-    sv_piernaIzquierda.write(50);
-    sv_hombroIzquierdo.write(130);
-    sv_hombroDerecho.write(130);
-    sv_rodillaIzquierda.write(90);
-    sv_rodillaDerecha.write(180);
-    sv_codoIzquierdo.write(0);
-    sv_codoDerecho.write(90);
-*/
     
-/*
-  for (pos = 120; pos >= 60; pos -= 1) {
-    //sv_cuello.write(pos);
-    sv_piernaDerecha.write(pos);
-    sv_piernaIzquierda.write(pos);
-    sv_hombroIzquierdo.write(pos);
-    sv_hombroDerecho.write(pos);
-    sv_rodillaIzquierda.write(pos);
-    sv_rodillaDerecha.write(pos);
-    sv_codoIzquierdo.write(pos);
-    sv_codoDerecho.write(pos);
-    Serial.println(pos);
-    delay(200);
-  }
-  for (pos = 60; pos <= 120; pos += 1) {
-    // in steps of 1 degree
-    //sv_cuello.write(pos);
-    sv_piernaDerecha.write(pos);
-    sv_piernaIzquierda.write(pos);
-    sv_hombroIzquierdo.write(pos);
-    sv_hombroDerecho.write(pos);
-    sv_rodillaIzquierda.write(pos);
-    sv_rodillaDerecha.write(pos);
-    sv_codoIzquierdo.write(pos);
-    sv_codoDerecho.write(pos);
-    Serial.println(pos);
-    delay(200);
-  }
-  */
+    delay(500);
+    sv_piernaDerecha.write(45);
+    sv_hombroDerecho.write(135);
+    delay(500);
+    sv_codoDerecho.write(135);
+    delay(500);
+    sv_codoDerecho.write(90);
+    sv_rodillaDerecha.write(180);
+    delay(500);
+    
+    
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(135);
+    sv_codoIzquierdo.write(0);
+    delay(500);
+    sv_rodillaIzquierda.write(45);
+    delay(500);
+    sv_rodillaIzquierda.write(90);
+    
+    delay(500); 
+    sv_piernaIzquierda.write(135);
+    sv_hombroIzquierdo.write(45);
+    delay(500);
+    sv_codoIzquierdo.write(45); 
+    delay(500);
+    sv_codoIzquierdo.write(90);
+    sv_rodillaIzquierda.write(0);
+    delay(500);
+    }
+*/
+
 }
