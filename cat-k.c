@@ -60,13 +60,21 @@ digitalWrite(13, HIGH);//envió del pulso.
 delayMicroseconds(10);
 tiem=pulseIn(12, HIGH);//fórmula para medir el pulso entrante.
 dis= long(0.017*tiem);//fórmula para calcular la distancia del sensor ultrasónico.
-if(dis>30){ //comparativo para la alarma se ingresa la distancia en la que encenderá o apagara.
-f_caminaPanza();
+
+if(dis>80){ //comparativo para la alarma se ingresa la distancia en la que encenderá o apagara.
+f_caminaSigiloso();
 }
 else
 {
-f_posicionZero();
+    if(dis>30 && dis<100){ //comparativo para la alarma se ingresa la distancia en la que encenderá o apagara.
+    f_caminaPanza();
+    }
+    else
+    {
+    f_posicionZero();
+    }
 }
+
 Serial.println("LA DISTANCIA MEDIDA ES:");
 Serial.println(dis);
 Serial.println("cm");
@@ -96,7 +104,7 @@ void f_posicionZero() {
 }
 
 void f_caminaSigiloso(){
-    for (int pos = 1; pos <= 5; pos += 1) {
+    for (int pos = 1; pos <= 2; pos += 1) {
         
     sv_piernaDerecha.write(135);
     sv_hombroDerecho.write(45);
@@ -140,7 +148,7 @@ void f_caminaSigiloso(){
     
 void f_caminaPanza() {
   
-    for (int pos = 1; pos <= 4; pos += 1) {
+    for (int pos = 1; pos <= 2; pos += 1) {
     sv_rodillaIzquierda.write(0);
     sv_rodillaDerecha.write(180);
     sv_codoIzquierdo.write(0);
