@@ -26,6 +26,7 @@ void f_caminaPanza();
 void f_caminaSigiloso();
 
 
+
 void setup() {
   
   Serial.begin(9600);//iniciailzamos la comunicación
