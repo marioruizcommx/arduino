@@ -1,4 +1,3 @@
-
 #include <Servo.h>	
 
 //Declaracion de Servomotores
@@ -24,6 +23,7 @@ int salida;
 void f_pruebaComponentes();
 void f_caminaPanza();
 void f_caminaSigiloso();
+void f_escapaPorDerecha();
 
 
 
@@ -61,18 +61,18 @@ digitalWrite(13, HIGH);//envió del pulso.
 delayMicroseconds(10);
 tiem=pulseIn(12, HIGH);//fórmula para medir el pulso entrante.
 dis= long(0.017*tiem);//fórmula para calcular la distancia del sensor ultrasónico.
-
 if(dis>80){ //comparativo para la alarma se ingresa la distancia en la que encenderá o apagara.
-f_caminaSigiloso();
+f_caminaPanza();
 }
 else
 {
-    if(dis>30 && dis<100){ //comparativo para la alarma se ingresa la distancia en la que encenderá o apagara.
-    f_caminaPanza();
+    if(dis>30 && dis<80){ //comparativo para la alarma se ingresa la distancia en la que encenderá o apagara.  
+    f_caminaSigiloso();
     }
     else
     {
-    f_posicionZero();
+    f_escapaPorDerecha();
+    //f_posicionZero();
     }
 }
 
@@ -105,9 +105,9 @@ void f_posicionZero() {
 }
 
 void f_caminaSigiloso(){
-    for (int pos = 1; pos <= 2; pos += 1) {
+
         
-    sv_piernaDerecha.write(135);
+    sv_piernaDerecha.write(120);
     sv_hombroDerecho.write(45);
     sv_codoDerecho.write(180);
     delay(500);
@@ -116,7 +116,7 @@ void f_caminaSigiloso(){
     sv_rodillaDerecha.write(90);
     
     delay(500);
-    sv_piernaDerecha.write(45);
+    sv_piernaDerecha.write(60);
     sv_hombroDerecho.write(135);
     delay(500);
     sv_codoDerecho.write(135);
@@ -126,7 +126,7 @@ void f_caminaSigiloso(){
     delay(500);
     
     
-    sv_piernaIzquierda.write(45);
+    sv_piernaIzquierda.write(60);
     sv_hombroIzquierdo.write(135);
     sv_codoIzquierdo.write(0);
     delay(500);
@@ -135,7 +135,7 @@ void f_caminaSigiloso(){
     sv_rodillaIzquierda.write(90);
     
     delay(500); 
-    sv_piernaIzquierda.write(135);
+    sv_piernaIzquierda.write(120);
     sv_hombroIzquierdo.write(45);
     delay(500);
     sv_codoIzquierdo.write(45); 
@@ -143,13 +143,14 @@ void f_caminaSigiloso(){
     sv_codoIzquierdo.write(90);
     sv_rodillaIzquierda.write(0);
     delay(500);
-    }
+    
 
 }
     
 void f_caminaPanza() {
   
-    for (int pos = 1; pos <= 2; pos += 1) {
+      for (int pos = 1; pos <= 5; pos += 1) {
+  
     sv_rodillaIzquierda.write(0);
     sv_rodillaDerecha.write(180);
     sv_codoIzquierdo.write(0);
@@ -166,7 +167,27 @@ void f_caminaPanza() {
     sv_hombroDerecho.write(45);
     delay(400);
     }
-    
 }
 
+void f_escapaPorDerecha() {
+  
+    for (int pos = 1; pos <= 40; pos += 1) {
+    sv_piernaIzquierda.write(90);
+    sv_hombroIzquierdo.write(90);
+    sv_rodillaIzquierda.write(0);
+    sv_codoIzquierdo.write(0);
+ 
+    sv_rodillaDerecha.write(180);
+    sv_codoDerecho.write(180);
+    delay(400);
+    sv_piernaDerecha.write(45);
+    sv_hombroDerecho.write(135); 
+    delay(400);
+    sv_piernaDerecha.write(135);
+    sv_hombroDerecho.write(45);
+    delay(400);
+    }
+
+    
+}
 
