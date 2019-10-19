@@ -33,6 +33,7 @@ void f_pruebaComponentes();
 void f_caminaPanza();
 void f_caminaSigiloso();
 void f_escapaPorDerecha();
+void f_banner();
 
 ////////////////////////////
 
@@ -56,6 +57,7 @@ void setup() {
 //////////////////////////////
 
 void loop() {
+                                                      
 m_inicio_operativo();
 
 }
@@ -64,6 +66,7 @@ m_inicio_operativo();
 
 void m_inicio_operativo() {
 
+f_banner()
 digitalWrite(13,LOW);//recibimiento del pulso.
 delayMicroseconds(5);
 digitalWrite(13, HIGH);//envió del pulso.
@@ -71,21 +74,21 @@ delayMicroseconds(10);
 tiem=pulseIn(12, HIGH);//fórmula para medir el pulso entrante.
 dis= long(0.017*tiem);//fórmula para calcular la distancia del sensor ultrasónico.
 
-if(dis>80){ //comparativo para la alarma se ingresa la distancia en la que encenderá o apagara.
+if(dis>80){ //Si la distancia es mayor a 80cm avanza rapido.
     f_caminaPanza();
 }
 else
 {
-    if(dis>30 && dis<80){ //comparativo para la alarma se ingresa la distancia en la que encenderá o apagara.  
+    if(dis>30 && dis<80){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
         f_caminaSigiloso();
     }
     else
     {
-        f_escapaPorDerecha();
+        f_escapaPorDerecha();//Al estar a 30cm o menos de un obstaculo recto comienza a girar a la derecha
     }
 }
 
-Serial.println("LA DISTANCIA MEDIDA ES:");
+Serial.println("Distancia para el impacto:");
 Serial.println(dis);
 Serial.println("cm");
 delay(500);
@@ -103,6 +106,9 @@ f_posicionZero;
 
 void f_posicionZero() {
 
+    //Esta posicion no se encuentra implementado
+    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
+  
     sv_piernaDerecha.write(90);
     sv_piernaIzquierda.write(90);
     sv_hombroIzquierdo.write(90);
@@ -204,5 +210,20 @@ void f_escapaPorDerecha() {
     }
 
     
+}
+
+void f_banner(){
+
+Serial.println("          _   _             _                   _                  _ _   _               "); 
+Serial.println("     /\  | | | |           | |            /\   | |                (_) | | |              ");
+Serial.println("    /  \ | |_| | __ _ _ __ | |_ __ _     /  \  | | __ _  ___  _ __ _| |_| |__  _ __ ___  ");
+Serial.println("   / /\ \| __| |/ _` | '_ \| __/ _` |   / /\ \ | |/ _` |/ _ \| '__| | __| '_ \| '_ ` _ \ ");
+Serial.println("  / ____ \ |_| | (_| | | | | || (_| |  / ____ \| | (_| | (_) | |  | | |_| | | | | | | | |");
+Serial.println(" /_/    \_\__|_|\__,_|_| |_|\__\__,_| /_/    \_\_|\__, |\___/|_|  |_|\__|_| |_|_| |_| |_|");
+Serial.println("                                                   __/ |                                 ");
+Serial.println("                                                  |___/                                  ");
+Serial.println("                                                                                         ");
+Serial.println("                                         https://www.atlantaalgorithm.com/               ");
+
 }
 
