@@ -1,3 +1,4 @@
+#include <HC_SR04_lib.h>
 #include <Servo.h>  
 
 /*
@@ -13,9 +14,13 @@
 
 //Declaracion de variables
 
-long dis;
-long tiem;
-int salida;
+int concurrencia_distancia;
+long randomNumber;
+const int Triger_Pin = 13;
+const int Echo_Pin = 12;
+unsigned long Lectura = 0;
+unsigned char status_sens = 0;
+HC_SR04Dev Sensor_A(Triger_Pin, Echo_Pin,UNITS_METRIC);
 
 Servo sv_cuello;
 Servo sv_piernaDerecha;
@@ -34,7 +39,7 @@ void f_caminaPanza();
 void f_caminaSigiloso();
 void f_escapaPorDerecha();
 void f_escapaPorIzquierda();
-void f_banner();
+void f_banner1();
 void f_posicionAcostado();
 void f_posicionAburrido();
 void f_posicionAburrido2(); 
@@ -54,9 +59,8 @@ void setup() {
   sv_rodillaDerecha.attach(9);
   sv_codoIzquierdo.attach(10);
   sv_codoDerecho.attach(11);
-  
-  pinMode(13, OUTPUT); //salida del pulso generado por el sensor ultrasónico
-  pinMode(12, INPUT);//entrada del pulso generado por el sensor ultrasónico
+  Sensor_A.SetMinMax(10, 1000);
+  randomSeed(analogRead(A0));
 
 }
 
@@ -64,41 +68,78 @@ void setup() {
 
 void loop() {
                                                       
-//m_inicio_operativo();
-f_pruebaComponentes();
+m_inicio_operativo();
+//f_pruebaComponentes();
 
 }
 
-//////////////////////////////
+  //////////////////////////////
 
 void m_inicio_operativo() {
 
-f_banner();
-digitalWrite(13,LOW);//recibimiento del pulso.
-delayMicroseconds(5);
-digitalWrite(13, HIGH);//envió del pulso.
-delayMicroseconds(10);
-tiem=pulseIn(12, HIGH);//fórmula para medir el pulso entrante.
-dis= long(0.017*tiem);//fórmula para calcular la distancia del sensor ultrasónico.
 
-if(dis>80){ //Si la distancia es mayor a 80cm avanza rapido.
-    f_caminaPanza();
-}
-else
-{
-    if(dis>30 && dis<80){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
-        f_caminaSigiloso();
-    }
-    else
-    {
-        f_escapaPorDerecha();//Al estar a 30cm o menos de un obstaculo recto comienza a girar a la derecha
-    }
-}
+randomNumber = random(1,4);
+switch (randomNumber) {
+    case (1): {
+      f_banner1();
+        break;
+      }
+    case (2): {
+      f_banner2();
+        break;
+      }
+    case (3): {
+      f_banner3();
+        break;
+      }
+    default:
+      break;
+  }
+  
+delay(100);
 
-Serial.println("Distancia para el impacto:");
-Serial.println(dis);
-Serial.println("cm");
-delay(500);
+ status_sens = Sensor_A.Sync();
+  switch (status_sens) {
+    case (HC_SR04_OFF): {
+        break;
+      }
+    case (HC_SR04_TIMEOUT_READ): {
+        break;
+      }
+    case (HC_SR04_READ_OK): {
+        Lectura = Sensor_A.Read();
+                if(Lectura>80){ //Si la distancia es mayor a 80cm avanza rapido.
+                f_caminaPanza();
+                }
+                else
+                {
+                    if(Lectura>30 && Lectura<80){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
+                        f_caminaSigiloso();
+                    }
+                    else
+                    {
+                        f_escapaPorDerecha();//Al estar a 30cm o menos de un obstaculo recto comienza a girar a la derecha
+                    }
+                }
+        Serial.print("Lectura OK: ");
+        Serial.print(Lectura);
+        Serial.println(" Centimeters3");
+        break;
+      }
+    case (HC_SR04_UNDER_MIN): {
+        break;
+      }
+    case (HC_SR04_OVER_MAX): {
+        break;
+      }
+    case (HC_SR04_READ_ERR): {
+        break;
+      }
+    default:
+      break;
+  }
+       
+
 }
 
 //////////////////////////////
@@ -397,8 +438,7 @@ void f_escapaPorIzquierda() {
 
 ///////////////////////////////
 
-void f_banner(){
-
+void f_banner1(){
 Serial.println("          _   _             _                   _                  _ _   _               "); 
 Serial.println("     /\  | | | |           | |            /\   | |                (_) | | |              ");
 Serial.println("    /  \ | |_| | __ _ _ __ | |_ __ _     /  \  | | __ _  ___  _ __ _| |_| |__  _ __ ___  ");
@@ -409,5 +449,24 @@ Serial.println("                                                   __/ |        
 Serial.println("                                                  |___/                                  ");
 Serial.println("                                                                                         ");
 Serial.println("                                         https://www.atlantaalgorithm.com/               ");
+}
 
+///////////////////////////////
+
+void f_banner2(){
+Serial.println("    ,.   .  .          .          ,.   .                .  .         ");
+Serial.println("   / |   |- |  ,-. ,-. |- ,-.    / |   |  ,-. ,-. ,-. . |- |-. ,-,-. ");
+Serial.println("  /~~|-. |  |  ,-| | | |  ,-|   /~~|-. |  | | | | |   | |  | | | | | ");
+Serial.println(",'   `-' `' `' `-^ ' ' `' `-^ ,'   `-' `' `-| `-' '   ' `' ' ' ' ' ' ");
+Serial.println("                                           ,|                        ");
+Serial.println("                                           `'                        ");
+Serial.println("                             https://www.atlantaalgorithm.com/       ");
+}
+
+void f_banner3(){
+Serial.println(" +-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+-+");
+Serial.println(" |A|t|l|a|n|t|a| |A|l|g|o|r|i|t|h|m|");
+Serial.println(" +-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+-+");
+Serial.println("                                    ");
+Serial.println("   https://www.atlantaalgorithm.com/");
 }
