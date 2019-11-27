@@ -33,6 +33,7 @@ void f_pruebaComponentes();
 void f_caminaPanza();
 void f_caminaSigiloso();
 void f_escapaPorDerecha();
+void f_escapaPorIzquierda();
 void f_banner();
 void f_posicionAcostado();
 void f_posicionAburrido();
@@ -103,8 +104,7 @@ delay(500);
 //////////////////////////////
 
 void f_pruebaComponentes() {
-
-f_posicionAburrido5();
+f_escapaPorIzquierda();
     
     }
 
@@ -370,6 +370,32 @@ void f_escapaPorDerecha() {
 
     
 }
+
+
+//////////////////////////////
+
+void f_escapaPorIzquierda() {
+  
+    for (int pos = 1; pos <= 40; pos += 1) {
+    sv_piernaDerecha.write(90);
+    sv_hombroDerecho.write(90);
+    sv_rodillaDerecha.write(180);
+    sv_codoDerecho.write(180);
+ 
+    sv_rodillaIzquierda.write(0);
+    sv_codoIzquierdo.write(180);
+    delay(400);
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(135); 
+    delay(400);
+    sv_piernaIzquierda.write(135);
+    sv_hombroIzquierdo.write(45);
+    delay(400);
+    }
+
+} 
+
+///////////////////////////////
 
 void f_banner(){
 
