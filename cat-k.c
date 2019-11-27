@@ -1,4 +1,4 @@
-#include <Servo.h>	
+#include <Servo.h>  
 
 /*
 *--------------------------------------------*
@@ -34,7 +34,12 @@ void f_caminaPanza();
 void f_caminaSigiloso();
 void f_escapaPorDerecha();
 void f_banner();
-
+void f_posicionAcostado();
+void f_posicionAburrido();
+void f_posicionAburrido2(); 
+void f_posicionAburrido3();
+void f_posicionAburrido4();
+void f_posicionAburrido5();
 ////////////////////////////
 
 void setup() {
@@ -58,7 +63,8 @@ void setup() {
 
 void loop() {
                                                       
-m_inicio_operativo();
+//m_inicio_operativo();
+f_pruebaComponentes();
 
 }
 
@@ -66,7 +72,7 @@ m_inicio_operativo();
 
 void m_inicio_operativo() {
 
-f_banner()
+f_banner();
 digitalWrite(13,LOW);//recibimiento del pulso.
 delayMicroseconds(5);
 digitalWrite(13, HIGH);//envió del pulso.
@@ -98,7 +104,7 @@ delay(500);
 
 void f_pruebaComponentes() {
 
-f_posicionZero;
+f_posicionAburrido5();
     
     }
 
@@ -120,6 +126,159 @@ void f_posicionZero() {
    
 }
 
+//////////////////////////////
+
+void f_posicionAcostado() {
+
+    //Esta posicion no se encuentra implementado
+  
+    sv_piernaDerecha.write(150);
+    sv_piernaIzquierda.write(30);
+    sv_hombroIzquierdo.write(110);
+    sv_hombroDerecho.write(70);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(40);
+    sv_codoDerecho.write(140);
+   
+}
+
+//////////////////////////////
+
+void f_posicionAburrido() {
+
+    //Esta posicion no se encuentra implementado
+  
+    sv_piernaDerecha.write(180);
+    sv_piernaIzquierda.write(0);
+    sv_hombroIzquierdo.write(0);
+    sv_hombroDerecho.write(180);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
+   
+}
+
+//////////////////////////////
+
+void f_posicionAburrido2() {
+
+    //Esta posicion no se encuentra implementado
+
+   for (int pos = 1; pos <= 40; pos += 1) {
+    sv_piernaDerecha.write(180);
+    sv_piernaIzquierda.write(0);
+    sv_hombroIzquierdo.write(0);
+    sv_hombroDerecho.write(180);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
+    delay(500);
+    sv_piernaDerecha.write(180);
+    sv_piernaIzquierda.write(0);
+    sv_hombroIzquierdo.write(0);
+    sv_hombroDerecho.write(180);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(120);
+    delay(500);
+   }
+   
+}
+
+
+////////////////////////////////
+
+
+void f_posicionAburrido3() {
+
+    //Esta posicion no se encuentra implementado
+
+   for (int pos = 1; pos <= 40; pos += 1) {
+    sv_piernaDerecha.write(180);
+    sv_piernaIzquierda.write(0);
+    sv_hombroIzquierdo.write(0);
+    sv_hombroDerecho.write(180);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
+    delay(500);
+    sv_piernaDerecha.write(180);
+    sv_piernaIzquierda.write(0);
+    sv_hombroIzquierdo.write(0);
+    sv_hombroDerecho.write(180);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(70);
+    sv_codoDerecho.write(90);
+    delay(500);
+   }
+   
+}
+
+////////////////////////////////
+
+
+void f_posicionAburrido4() {
+
+    //Esta posicion no se encuentra implementado
+
+   for (int pos = 1; pos <= 40; pos += 1) {
+    sv_piernaDerecha.write(180);
+    sv_piernaIzquierda.write(0);
+    sv_hombroIzquierdo.write(0);
+    sv_hombroDerecho.write(180);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
+    delay(500);
+    sv_piernaDerecha.write(180);
+    sv_piernaIzquierda.write(0);
+    sv_hombroIzquierdo.write(0);
+    sv_hombroDerecho.write(180);
+    sv_rodillaIzquierda.write(120);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
+    delay(500);
+   }
+   
+}
+
+
+//////////////////////////////
+
+void f_posicionAburrido5() {
+
+    //Esta posicion no se encuentra implementado
+
+   for (int pos = 1; pos <= 40; pos += 1) {
+    sv_piernaDerecha.write(180);
+    sv_piernaIzquierda.write(0);
+    sv_hombroIzquierdo.write(0);
+    sv_hombroDerecho.write(180);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
+    delay(500);
+    sv_piernaDerecha.write(180);
+    sv_piernaIzquierda.write(0);
+    sv_hombroIzquierdo.write(0);
+    sv_hombroDerecho.write(180);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(70);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
+    delay(500);
+   }
+   
+}
 //////////////////////////////
 
 void f_caminaSigiloso(){
@@ -226,4 +385,3 @@ Serial.println("                                                                
 Serial.println("                                         https://www.atlantaalgorithm.com/               ");
 
 }
-
