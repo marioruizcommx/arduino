@@ -41,7 +41,7 @@ void f_escapaPorDerecha();
 void f_escapaPorIzquierda();
 void f_banner1();
 void f_posicionAcostado();
-void f_posicionAburrido();
+void f_posicionAburrido1();
 void f_posicionAburrido2(); 
 void f_posicionAburrido3();
 void f_posicionAburrido4();
@@ -108,17 +108,74 @@ delay(100);
       }
     case (HC_SR04_READ_OK): {
         Lectura = Sensor_A.Read();
-                if(Lectura>80){ //Si la distancia es mayor a 80cm avanza rapido.
+                if(Lectura>200){ //Si la distancia es mayor a 80cm avanza rapido.
                 f_caminaPanza();
                 }
                 else
                 {
-                    if(Lectura>30 && Lectura<80){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
-                        f_caminaSigiloso();
+                    if(Lectura>30 && Lectura<200){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
+                        
+                        randomNumber = random(1,3);
+                        switch (randomNumber) {
+                            case (1): {
+                              f_caminaSigiloso();
+                                break;
+                              }
+                            case (2): {
+                              f_posicionAcostado();
+                              delay(100);
+                                  randomNumber = random(1,6);
+                                  switch (randomNumber) {
+                                    case (1): {
+                                        f_posicionAburrido1();
+                                        delay(100);
+                                        f_posicionAburrido2();
+                                        break;
+                                      }
+                                     case (2): {
+                                        f_posicionAburrido1();
+                                        delay(100);
+                                        f_posicionAburrido3();
+                                        break;
+                                      }
+                                     case (3): {
+                                        f_posicionAburrido1();
+                                        delay(100);
+                                        f_posicionAburrido4();
+                                        break;
+                                      }
+                                     case (4): {
+                                        f_posicionAburrido1();
+                                        delay(100);
+                                        f_posicionAburrido5();
+                                        break;
+                                      }
+                                    default:
+                                      break;
+                                  }
+                                   f_posicionAcostado();
+                                break;
+                              }
+                            default:
+                              break;
+                          }
                     }
                     else
-                    {
-                        f_escapaPorDerecha();//Al estar a 30cm o menos de un obstaculo recto comienza a girar a la derecha
+                    { 
+                        randomNumber = random(1,3);
+                        switch (randomNumber) {
+                            case (1): {
+                              f_escapaPorDerecha();//Al estar a 30cm o menos de un obstaculo recto comienza a girar a la derecha
+                                break;
+                              }
+                            case (2): {
+                              f_escapaPorIzquierda();//Al estar a 30cm o menos de un obstaculo recto comienza a girar a la izquierda
+                                break;
+                              }
+                            default:
+                              break;
+                          }
+                        
                     }
                 }
         Serial.print("Lectura OK: ");
@@ -186,7 +243,7 @@ void f_posicionAcostado() {
 
 //////////////////////////////
 
-void f_posicionAburrido() {
+void f_posicionAburrido1() {
 
     //Esta posicion no se encuentra implementado
   
@@ -206,8 +263,8 @@ void f_posicionAburrido() {
 void f_posicionAburrido2() {
 
     //Esta posicion no se encuentra implementado
-
-   for (int pos = 1; pos <= 40; pos += 1) {
+   randomNumber = random(1,10);
+   for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(180);
     sv_piernaIzquierda.write(0);
     sv_hombroIzquierdo.write(0);
@@ -238,7 +295,8 @@ void f_posicionAburrido3() {
 
     //Esta posicion no se encuentra implementado
 
-   for (int pos = 1; pos <= 40; pos += 1) {
+   randomNumber = random(1,10);
+   for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(180);
     sv_piernaIzquierda.write(0);
     sv_hombroIzquierdo.write(0);
@@ -268,7 +326,8 @@ void f_posicionAburrido4() {
 
     //Esta posicion no se encuentra implementado
 
-   for (int pos = 1; pos <= 40; pos += 1) {
+   randomNumber = random(1,10);
+   for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(180);
     sv_piernaIzquierda.write(0);
     sv_hombroIzquierdo.write(0);
@@ -298,7 +357,8 @@ void f_posicionAburrido5() {
 
     //Esta posicion no se encuentra implementado
 
-   for (int pos = 1; pos <= 40; pos += 1) {
+   randomNumber = random(1,10);
+   for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(180);
     sv_piernaIzquierda.write(0);
     sv_hombroIzquierdo.write(0);
@@ -365,9 +425,9 @@ void f_caminaSigiloso(){
 //////////////////////////////
     
 void f_caminaPanza() {
-  
-    for (int pos = 1; pos <= 5; pos += 1) {
-  
+
+  randomNumber = random(5,10);
+   for (int pos = 1; pos <= randomNumber; pos += 1) {
         sv_rodillaIzquierda.write(0);
         sv_rodillaDerecha.write(180);
         sv_codoIzquierdo.write(0);
@@ -424,7 +484,7 @@ void f_escapaPorIzquierda() {
     sv_codoDerecho.write(180);
  
     sv_rodillaIzquierda.write(0);
-    sv_codoIzquierdo.write(180);
+    sv_codoIzquierdo.write(0);
     delay(400);
     sv_piernaIzquierda.write(45);
     sv_hombroIzquierdo.write(135); 
