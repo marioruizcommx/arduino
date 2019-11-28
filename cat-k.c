@@ -14,7 +14,7 @@
 
 //Declaracion de variables
 
-int concurrencia_distancia;
+int concurrencia_distancia = 1;
 long randomNumber;
 const int Triger_Pin = 13;
 const int Echo_Pin = 12;
@@ -77,6 +77,9 @@ m_inicio_operativo();
 
 void m_inicio_operativo() {
 
+if(concurrencia_distancia=21){
+  concurrencia_distancia=1;
+  }
 
 randomNumber = random(1,4);
 switch (randomNumber) {
@@ -114,7 +117,8 @@ delay(100);
                 else
                 {
                     if(Lectura>30 && Lectura<200){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
-                        
+
+                      if (concurrencia_distancia >=10 && concurrencia_distancia <=20) {
                         randomNumber = random(1,3);
                         switch (randomNumber) {
                             case (1): {
@@ -159,6 +163,11 @@ delay(100);
                             default:
                               break;
                           }
+                          //
+                      }else{
+                        f_caminaSigiloso();
+                        }
+                        //
                     }
                     else
                     { 
@@ -181,6 +190,7 @@ delay(100);
         Serial.print("Lectura OK: ");
         Serial.print(Lectura);
         Serial.println(" Centimeters3");
+        concurrencia_distancia=concurrencia_distancia+1;
         break;
       }
     case (HC_SR04_UNDER_MIN): {
