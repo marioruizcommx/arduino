@@ -37,6 +37,7 @@ Servo sv_codoDerecho;
 void f_pruebaComponentes();
 void f_caminaPanza();
 void f_caminaSigiloso();
+void f_caminaSigiloso1();
 void f_escapaPorDerecha();
 void f_escapaPorIzquierda();
 void f_banner1();
@@ -76,12 +77,15 @@ m_inicio_operativo();
   //////////////////////////////
 
 void m_inicio_operativo() {
-
-if(concurrencia_distancia=21){
-  concurrencia_distancia=1;
-  }
+Serial.print("Consurrencia: ");
+Serial.println(concurrencia_distancia );
+//if(concurrencia_distancia=21){
+//  concurrencia_distancia=1;
+//  }
 
 randomNumber = random(1,4);
+Serial.print("Banner a mostrar: ");
+Serial.println(randomNumber );
 switch (randomNumber) {
     case (1): {
       f_banner1();
@@ -119,6 +123,7 @@ delay(100);
                     if(Lectura>30 && Lectura<200){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
 
                       if (concurrencia_distancia >=10 && concurrencia_distancia <=20) {
+                        Serial.print("----------------------------------------------------------------Entro");
                         randomNumber = random(1,3);
                         switch (randomNumber) {
                             case (1): {
@@ -126,31 +131,32 @@ delay(100);
                                 break;
                               }
                             case (2): {
+                              delay(500);
                               f_posicionAcostado();
-                              delay(100);
+                              delay(500);
                                   randomNumber = random(1,6);
                                   switch (randomNumber) {
                                     case (1): {
                                         f_posicionAburrido1();
-                                        delay(100);
+                                        delay(500);
                                         f_posicionAburrido2();
                                         break;
                                       }
                                      case (2): {
                                         f_posicionAburrido1();
-                                        delay(100);
+                                        delay(500);
                                         f_posicionAburrido3();
                                         break;
                                       }
                                      case (3): {
                                         f_posicionAburrido1();
-                                        delay(100);
+                                        delay(500);
                                         f_posicionAburrido4();
                                         break;
                                       }
                                      case (4): {
                                         f_posicionAburrido1();
-                                        delay(100);
+                                        delay(500);
                                         f_posicionAburrido5();
                                         break;
                                       }
@@ -187,10 +193,12 @@ delay(100);
                         
                     }
                 }
-        Serial.print("Lectura OK: ");
+        Serial.println("Lectura OK: ");
         Serial.print(Lectura);
         Serial.println(" Centimeters3");
-        concurrencia_distancia=concurrencia_distancia+1;
+        concurrencia_distancia++;
+        Serial.print("Consurrencia de salida: ");
+        Serial.println(concurrencia_distancia );
         break;
       }
     case (HC_SR04_UNDER_MIN): {
@@ -212,7 +220,19 @@ delay(100);
 //////////////////////////////
 
 void f_pruebaComponentes() {
-f_escapaPorIzquierda();
+//f_caminaSigiloso1();
+//f_caminaPanza();
+//f_caminaSigiloso();
+//f_caminaSigiloso1();
+//f_escapaPorDerecha();
+//f_escapaPorIzquierda();
+//f_banner1();
+//f_posicionAcostado();
+//f_posicionAburrido1();
+//f_posicionAburrido2(); 
+//f_posicionAburrido3();
+//f_posicionAburrido4();
+f_posicionAburrido5();
     
     }
 
@@ -227,10 +247,10 @@ void f_posicionZero() {
     sv_piernaIzquierda.write(90);
     sv_hombroIzquierdo.write(90);
     sv_hombroDerecho.write(90);
-    sv_rodillaIzquierda.write(0);
-    sv_rodillaDerecha.write(180);
-    sv_codoIzquierdo.write(0);
-    sv_codoDerecho.write(180);
+    sv_rodillaIzquierda.write(10);
+    sv_rodillaDerecha.write(170);
+    sv_codoIzquierdo.write(10);
+    sv_codoDerecho.write(170);
    
 }
 
@@ -257,10 +277,10 @@ void f_posicionAburrido1() {
 
     //Esta posicion no se encuentra implementado
   
-    sv_piernaDerecha.write(180);
-    sv_piernaIzquierda.write(0);
-    sv_hombroIzquierdo.write(0);
-    sv_hombroDerecho.write(180);
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
     sv_rodillaIzquierda.write(90);
     sv_rodillaDerecha.write(90);
     sv_codoIzquierdo.write(90);
@@ -275,23 +295,23 @@ void f_posicionAburrido2() {
     //Esta posicion no se encuentra implementado
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
-    sv_piernaDerecha.write(180);
-    sv_piernaIzquierda.write(0);
-    sv_hombroIzquierdo.write(0);
-    sv_hombroDerecho.write(180);
-    sv_rodillaIzquierda.write(90);
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
+    sv_rodillaIzquierda.write(10);
     sv_rodillaDerecha.write(90);
     sv_codoIzquierdo.write(90);
     sv_codoDerecho.write(90);
     delay(500);
-    sv_piernaDerecha.write(180);
-    sv_piernaIzquierda.write(0);
-    sv_hombroIzquierdo.write(0);
-    sv_hombroDerecho.write(180);
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
     sv_rodillaIzquierda.write(90);
     sv_rodillaDerecha.write(90);
     sv_codoIzquierdo.write(90);
-    sv_codoDerecho.write(120);
+    sv_codoDerecho.write(90);
     delay(500);
    }
    
@@ -307,19 +327,19 @@ void f_posicionAburrido3() {
 
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
-    sv_piernaDerecha.write(180);
-    sv_piernaIzquierda.write(0);
-    sv_hombroIzquierdo.write(0);
-    sv_hombroDerecho.write(180);
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
     sv_rodillaIzquierda.write(90);
     sv_rodillaDerecha.write(90);
     sv_codoIzquierdo.write(90);
     sv_codoDerecho.write(90);
     delay(500);
-    sv_piernaDerecha.write(180);
-    sv_piernaIzquierda.write(0);
-    sv_hombroIzquierdo.write(0);
-    sv_hombroDerecho.write(180);
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
     sv_rodillaIzquierda.write(90);
     sv_rodillaDerecha.write(90);
     sv_codoIzquierdo.write(70);
@@ -338,19 +358,19 @@ void f_posicionAburrido4() {
 
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
-    sv_piernaDerecha.write(180);
-    sv_piernaIzquierda.write(0);
-    sv_hombroIzquierdo.write(0);
-    sv_hombroDerecho.write(180);
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
     sv_rodillaIzquierda.write(90);
     sv_rodillaDerecha.write(90);
     sv_codoIzquierdo.write(90);
     sv_codoDerecho.write(90);
     delay(500);
-    sv_piernaDerecha.write(180);
-    sv_piernaIzquierda.write(0);
-    sv_hombroIzquierdo.write(0);
-    sv_hombroDerecho.write(180);
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
     sv_rodillaIzquierda.write(120);
     sv_rodillaDerecha.write(90);
     sv_codoIzquierdo.write(90);
@@ -369,19 +389,19 @@ void f_posicionAburrido5() {
 
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
-    sv_piernaDerecha.write(180);
-    sv_piernaIzquierda.write(0);
-    sv_hombroIzquierdo.write(0);
-    sv_hombroDerecho.write(180);
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
     sv_rodillaIzquierda.write(90);
     sv_rodillaDerecha.write(90);
     sv_codoIzquierdo.write(90);
     sv_codoDerecho.write(90);
     delay(500);
-    sv_piernaDerecha.write(180);
-    sv_piernaIzquierda.write(0);
-    sv_hombroIzquierdo.write(0);
-    sv_hombroDerecho.write(180);
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
     sv_rodillaIzquierda.write(90);
     sv_rodillaDerecha.write(70);
     sv_codoIzquierdo.write(90);
@@ -396,11 +416,51 @@ void f_caminaSigiloso(){
       
     sv_piernaDerecha.write(120);
     sv_hombroDerecho.write(45);
-    sv_codoDerecho.write(180);
+    sv_codoDerecho.write(170);
+    delay(200);
+    sv_rodillaDerecha.write(135);
+    delay(200);
+    sv_rodillaDerecha.write(90);
+    
+    delay(200);
+    sv_piernaDerecha.write(60);
+    sv_hombroDerecho.write(135);
+    delay(200);
+    sv_codoDerecho.write(135);
+    delay(200);
+    sv_codoDerecho.write(90);
+    sv_rodillaDerecha.write(170);
+    delay(200);
+      
+    sv_piernaIzquierda.write(60);
+    sv_hombroIzquierdo.write(135);
+    sv_codoIzquierdo.write(10);
+    delay(200);
+    sv_rodillaIzquierda.write(45);
+    delay(200);
+    sv_rodillaIzquierda.write(90);
+    
+    delay(200); 
+    sv_piernaIzquierda.write(120);
+    sv_hombroIzquierdo.write(45);
+    delay(200);
+    sv_codoIzquierdo.write(45); 
+    delay(200);
+    sv_codoIzquierdo.write(90);
+    sv_rodillaIzquierda.write(10);
+    delay(200);
+    
+}
+
+void f_caminaSigiloso1(){
+      
+    sv_piernaDerecha.write(120);
+    sv_hombroDerecho.write(45);
+    sv_codoDerecho.write(170);
     delay(500);
     sv_rodillaDerecha.write(135);
     delay(500);
-    sv_rodillaDerecha.write(90);
+    sv_rodillaDerecha.write(100);
     
     delay(500);
     sv_piernaDerecha.write(60);
@@ -409,16 +469,16 @@ void f_caminaSigiloso(){
     sv_codoDerecho.write(135);
     delay(500);
     sv_codoDerecho.write(90);
-    sv_rodillaDerecha.write(180);
+    sv_rodillaDerecha.write(170);
     delay(500);
       
     sv_piernaIzquierda.write(60);
     sv_hombroIzquierdo.write(135);
-    sv_codoIzquierdo.write(0);
+    sv_codoIzquierdo.write(10);
     delay(500);
     sv_rodillaIzquierda.write(45);
     delay(500);
-    sv_rodillaIzquierda.write(90);
+    sv_rodillaIzquierda.write(70);
     
     delay(500); 
     sv_piernaIzquierda.write(120);
@@ -427,21 +487,22 @@ void f_caminaSigiloso(){
     sv_codoIzquierdo.write(45); 
     delay(500);
     sv_codoIzquierdo.write(90);
-    sv_rodillaIzquierda.write(0);
+    sv_rodillaIzquierda.write(10);
     delay(500);
     
 }
 
 //////////////////////////////
+
     
 void f_caminaPanza() {
 
   randomNumber = random(5,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
-        sv_rodillaIzquierda.write(0);
-        sv_rodillaDerecha.write(180);
-        sv_codoIzquierdo.write(0);
-        sv_codoDerecho.write(180);
+        sv_rodillaIzquierda.write(10);
+        sv_rodillaDerecha.write(170);
+        sv_codoIzquierdo.write(10);
+        sv_codoDerecho.write(170);
         delay(400);
         sv_piernaDerecha.write(45);
         sv_piernaIzquierda.write(135);
@@ -465,11 +526,11 @@ void f_escapaPorDerecha() {
     for (int pos = 1; pos <= 40; pos += 1) {
     sv_piernaIzquierda.write(90);
     sv_hombroIzquierdo.write(90);
-    sv_rodillaIzquierda.write(0);
-    sv_codoIzquierdo.write(0);
+    sv_rodillaIzquierda.write(10);
+    sv_codoIzquierdo.write(10);
  
-    sv_rodillaDerecha.write(180);
-    sv_codoDerecho.write(180);
+    sv_rodillaDerecha.write(170);
+    sv_codoDerecho.write(170);
     delay(400);
     sv_piernaDerecha.write(45);
     sv_hombroDerecho.write(135); 
@@ -490,11 +551,11 @@ void f_escapaPorIzquierda() {
     for (int pos = 1; pos <= 40; pos += 1) {
     sv_piernaDerecha.write(90);
     sv_hombroDerecho.write(90);
-    sv_rodillaDerecha.write(180);
-    sv_codoDerecho.write(180);
+    sv_rodillaDerecha.write(170);
+    sv_codoDerecho.write(170);
  
-    sv_rodillaIzquierda.write(0);
-    sv_codoIzquierdo.write(0);
+    sv_rodillaIzquierda.write(10);
+    sv_codoIzquierdo.write(10);
     delay(400);
     sv_piernaIzquierda.write(45);
     sv_hombroIzquierdo.write(135); 
