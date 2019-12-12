@@ -15,6 +15,10 @@
 //Declaracion de variables
 
 int concurrencia_distancia = 1;
+int choque = 1;
+int camina = 1;
+int corre = 1;
+
 long randomNumber;
 const int Triger_Pin = 13;
 const int Echo_Pin = 12;
@@ -77,12 +81,13 @@ m_inicio_operativo();
   //////////////////////////////
 
 void m_inicio_operativo() {
-Serial.print("Consurrencia: ");
+Serial.print("Consurrencia inicial: ");
 Serial.println(concurrencia_distancia );
-//if(concurrencia_distancia=21){
-//  concurrencia_distancia=1;
-//  }
+if(concurrencia_distancia==21){
+  concurrencia_distancia=1;
+  }
 
+/*
 randomNumber = random(1,4);
 Serial.print("Banner a mostrar: ");
 Serial.println(randomNumber );
@@ -102,7 +107,7 @@ switch (randomNumber) {
     default:
       break;
   }
-  
+*/  
 delay(100);
 
  status_sens = Sensor_A.Sync();
@@ -115,14 +120,42 @@ delay(100);
       }
     case (HC_SR04_READ_OK): {
         Lectura = Sensor_A.Read();
-                if(Lectura>200){ //Si la distancia es mayor a 80cm avanza rapido.
+        
+        if(corre==4 || camina==4 || choque==4){
+          corre=0;
+          camina=0;
+          choque=0;
+        }
+        
+        if(Lectura>200 ){
+          corre++;
+        }
+        if (Lectura <=15 ) {
+          choque++;
+        }
+        if(Lectura>15 && Lectura<200){
+          camina++;
+        }
+
+        Serial.print("++++++++++Lectura: ");
+        Serial.println(Lectura);
+        Serial.print("++++++++++choque: ");
+        Serial.println(choque);
+        Serial.print("++++++++++camina: ");
+        Serial.println(camina);
+        Serial.print("++++++++++corre: ");
+        Serial.println(corre);
+
+        
+                if(Lectura>200 && corre ==3 ){ //Si la distancia es mayor a 80cm avanza rapido.
+
                 f_caminaPanza();
                 }
                 else
                 {
-                    if(Lectura>30 && Lectura<200){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
+                    if(Lectura>30 && Lectura<200 && camina ==3 ){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
 
-                      if (concurrencia_distancia >=10 && concurrencia_distancia <=20) {
+                      if (concurrencia_distancia >=40 && concurrencia_distancia <=50) {
                         Serial.print("----------------------------------------------------------------Entro");
                         randomNumber = random(1,3);
                         switch (randomNumber) {
@@ -131,32 +164,33 @@ delay(100);
                                 break;
                               }
                             case (2): {
-                              delay(500);
+                              delay(5000);
                               f_posicionAcostado();
-                              delay(500);
+                              delay(5000);
                                   randomNumber = random(1,6);
                                   switch (randomNumber) {
                                     case (1): {
-                                        f_posicionAburrido1();
                                         delay(500);
+                                        f_posicionAburrido1();
+                                        delay(5000);
                                         f_posicionAburrido2();
                                         break;
                                       }
                                      case (2): {
                                         f_posicionAburrido1();
-                                        delay(500);
+                                        delay(5000);
                                         f_posicionAburrido3();
                                         break;
                                       }
                                      case (3): {
                                         f_posicionAburrido1();
-                                        delay(500);
+                                        delay(5000);
                                         f_posicionAburrido4();
                                         break;
                                       }
                                      case (4): {
                                         f_posicionAburrido1();
-                                        delay(500);
+                                        delay(5000);
                                         f_posicionAburrido5();
                                         break;
                                       }
@@ -170,13 +204,14 @@ delay(100);
                               break;
                           }
                           //
-                      }else{
-                        f_caminaSigiloso();
-                        }
+                      }
                         //
                     }
                     else
                     { 
+                       f_caminaSigiloso();
+                        
+                       if (Lectura <=15  && choque == 3) {
                         randomNumber = random(1,3);
                         switch (randomNumber) {
                             case (1): {
@@ -190,15 +225,11 @@ delay(100);
                             default:
                               break;
                           }
+                          }
                         
                     }
                 }
-        Serial.println("Lectura OK: ");
-        Serial.print(Lectura);
-        Serial.println(" Centimeters3");
-        concurrencia_distancia++;
-        Serial.print("Consurrencia de salida: ");
-        Serial.println(concurrencia_distancia );
+
         break;
       }
     case (HC_SR04_UNDER_MIN): {
@@ -214,6 +245,9 @@ delay(100);
       break;
   }
        
+        concurrencia_distancia++;
+        Serial.print("Consurrencia de salida: ");
+        Serial.println(concurrencia_distancia );
 
 }
 
@@ -242,7 +276,8 @@ void f_posicionZero() {
 
     //Esta posicion no se encuentra implementado
     //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
-  
+
+    Serial.print("En este momento: PosicionZero");
     sv_piernaDerecha.write(90);
     sv_piernaIzquierda.write(90);
     sv_hombroIzquierdo.write(90);
@@ -259,7 +294,7 @@ void f_posicionZero() {
 void f_posicionAcostado() {
 
     //Esta posicion no se encuentra implementado
-  
+    Serial.print("En este momento: PosicionAcostado");
     sv_piernaDerecha.write(150);
     sv_piernaIzquierda.write(30);
     sv_hombroIzquierdo.write(110);
@@ -276,7 +311,7 @@ void f_posicionAcostado() {
 void f_posicionAburrido1() {
 
     //Esta posicion no se encuentra implementado
-  
+    Serial.print("En este momento: PosicionAburrido1");
     sv_piernaDerecha.write(170);
     sv_piernaIzquierda.write(10);
     sv_hombroIzquierdo.write(10);
@@ -293,6 +328,7 @@ void f_posicionAburrido1() {
 void f_posicionAburrido2() {
 
     //Esta posicion no se encuentra implementado
+   Serial.print("En este momento: PosicionAburrido2"); 
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(170);
@@ -324,7 +360,7 @@ void f_posicionAburrido2() {
 void f_posicionAburrido3() {
 
     //Esta posicion no se encuentra implementado
-
+   Serial.print("En este momento: PosicionAburrido3");
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(170);
@@ -355,7 +391,7 @@ void f_posicionAburrido3() {
 void f_posicionAburrido4() {
 
     //Esta posicion no se encuentra implementado
-
+   Serial.print("En este momento: PosicionAburrido4");
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(170);
@@ -386,7 +422,7 @@ void f_posicionAburrido4() {
 void f_posicionAburrido5() {
 
     //Esta posicion no se encuentra implementado
-
+   Serial.print("En este momento: PosicionAburrido5");
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(170);
@@ -413,7 +449,7 @@ void f_posicionAburrido5() {
 //////////////////////////////
 
 void f_caminaSigiloso(){
-      
+    Serial.print("En este momento: CaminaSigiloso");
     sv_piernaDerecha.write(120);
     sv_hombroDerecho.write(45);
     sv_codoDerecho.write(170);
@@ -453,7 +489,7 @@ void f_caminaSigiloso(){
 }
 
 void f_caminaSigiloso1(){
-      
+    Serial.print("En este momento: CaminaSigiloso1");
     sv_piernaDerecha.write(120);
     sv_hombroDerecho.write(45);
     sv_codoDerecho.write(170);
@@ -496,7 +532,7 @@ void f_caminaSigiloso1(){
 
     
 void f_caminaPanza() {
-
+  Serial.print("En este momento: CaminaPanza");
   randomNumber = random(5,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
         sv_rodillaIzquierda.write(10);
@@ -522,8 +558,8 @@ void f_caminaPanza() {
 //////////////////////////////
 
 void f_escapaPorDerecha() {
-  
-    for (int pos = 1; pos <= 40; pos += 1) {
+    Serial.print("En este momento: EscapaDerecha");
+    for (int pos = 1; pos <= 5; pos += 1) {
     sv_piernaIzquierda.write(90);
     sv_hombroIzquierdo.write(90);
     sv_rodillaIzquierda.write(10);
@@ -547,8 +583,8 @@ void f_escapaPorDerecha() {
 //////////////////////////////
 
 void f_escapaPorIzquierda() {
-  
-    for (int pos = 1; pos <= 40; pos += 1) {
+    Serial.print("En este momento: EscapaIzquierda");
+    for (int pos = 1; pos <= 5; pos += 1) {
     sv_piernaDerecha.write(90);
     sv_hombroDerecho.write(90);
     sv_rodillaDerecha.write(170);
