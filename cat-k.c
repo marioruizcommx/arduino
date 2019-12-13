@@ -87,7 +87,7 @@ if(concurrencia_distancia==21){
   concurrencia_distancia=1;
   }
 
-/*
+
 randomNumber = random(1,4);
 Serial.print("Banner a mostrar: ");
 Serial.println(randomNumber );
@@ -107,7 +107,7 @@ switch (randomNumber) {
     default:
       break;
   }
-*/  
+  
 delay(100);
 
  status_sens = Sensor_A.Sync();
@@ -127,13 +127,13 @@ delay(100);
           choque=0;
         }
         
-        if(Lectura>200 ){
+        if(Lectura>150 ){
           corre++;
         }
-        if (Lectura <=15 ) {
+        if (Lectura <=35 ) {
           choque++;
         }
-        if(Lectura>15 && Lectura<200){
+        if(Lectura>35 && Lectura<150){
           camina++;
         }
 
@@ -147,13 +147,13 @@ delay(100);
         Serial.println(corre);
 
         
-                if(Lectura>200 && corre ==3 ){ //Si la distancia es mayor a 80cm avanza rapido.
+                if(Lectura>150 && corre ==3 ){ //Si la distancia es mayor a 80cm avanza rapido.
 
                 f_caminaPanza();
                 }
                 else
                 {
-                    if(Lectura>30 && Lectura<200 && camina ==3 ){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
+                    if(Lectura>35 && Lectura<150 && camina ==3 ){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
 
                       if (concurrencia_distancia >=40 && concurrencia_distancia <=50) {
                         Serial.print("----------------------------------------------------------------Entro");
@@ -211,7 +211,7 @@ delay(100);
                     { 
                        f_caminaSigiloso();
                         
-                       if (Lectura <=15  && choque == 3) {
+                       if (Lectura <=35  && choque == 3) {
                         randomNumber = random(1,3);
                         switch (randomNumber) {
                             case (1): {
@@ -254,9 +254,10 @@ delay(100);
 //////////////////////////////
 
 void f_pruebaComponentes() {
+//f_posicionZero();
 //f_caminaSigiloso1();
 //f_caminaPanza();
-//f_caminaSigiloso();
+f_caminaSigiloso();
 //f_caminaSigiloso1();
 //f_escapaPorDerecha();
 //f_escapaPorIzquierda();
@@ -266,7 +267,7 @@ void f_pruebaComponentes() {
 //f_posicionAburrido2(); 
 //f_posicionAburrido3();
 //f_posicionAburrido4();
-f_posicionAburrido5();
+//f_posicionAburrido5();
     
     }
 
@@ -282,10 +283,10 @@ void f_posicionZero() {
     sv_piernaIzquierda.write(90);
     sv_hombroIzquierdo.write(90);
     sv_hombroDerecho.write(90);
-    sv_rodillaIzquierda.write(10);
-    sv_rodillaDerecha.write(170);
-    sv_codoIzquierdo.write(10);
-    sv_codoDerecho.write(170);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
    
 }
 
@@ -559,7 +560,7 @@ void f_caminaPanza() {
 
 void f_escapaPorDerecha() {
     Serial.print("En este momento: EscapaDerecha");
-    for (int pos = 1; pos <= 5; pos += 1) {
+    for (int pos = 1; pos <= 10; pos += 1) {
     sv_piernaIzquierda.write(90);
     sv_hombroIzquierdo.write(90);
     sv_rodillaIzquierda.write(10);
