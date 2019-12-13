@@ -11,26 +11,6 @@
 *  esperamos que te diviertas, saludos.      *
 *--------------------------------------------*
 */
-/*
-10	1055	writeMicroseconds(1055);
-20	1110	WriteMicroseconds(1110);
-30	1165	WriteMicroseconds(1165);
-40	1220	WriteMicroseconds(1220);
-50	1275	WriteMicroseconds(1275);
-60	1330	WriteMicroseconds(1330);
-70	1385	WriteMicroseconds(1385);
-80	1440	WriteMicroseconds(1440);
-90	1500	WriteMicroseconds(1500);
-100	1550	WriteMicroseconds(1550);
-110	1605	WriteMicroseconds(1605);
-120	1660	WriteMicroseconds(1660);
-130	1715	WriteMicroseconds(1715);
-140	1770	WriteMicroseconds(1770);
-150	1825	WriteMicroseconds(1825);
-160	1880	WriteMicroseconds(1880);
-170	1935	WriteMicroseconds(1935);
-180	2000	WriteMicroseconds(2000);
-*/
 
 //Declaracion de variables
 
@@ -76,14 +56,14 @@ void f_posicionAburrido5();
 void setup() {
   
   Serial.begin(9600);
-  sv_piernaIzquierda.attach(4, 1000, 2000);
-  sv_piernaDerecha.attach(5, 1000, 2000);
-  sv_hombroIzquierdo.attach(6, 1000, 2000);
-  sv_hombroDerecho.attach(7, 1000, 2000);
-  sv_rodillaIzquierda.attach(8, 1000, 2000);
-  sv_rodillaDerecha.attach(9, 1000, 2000);
-  sv_codoIzquierdo.attach(10, 1000, 2000);
-  sv_codoDerecho.attach(11, 1000, 2000);
+  sv_piernaIzquierda.attach(4, 544, 2400);
+  sv_piernaDerecha.attach(5, 544, 2400);
+  sv_hombroIzquierdo.attach(6, 544, 2400);
+  sv_hombroDerecho.attach(7, 544, 2400);
+  sv_rodillaIzquierda.attach(8, 544, 2400);
+  sv_rodillaDerecha.attach(9, 544, 2400);
+  sv_codoIzquierdo.attach(10, 544, 2400);
+  sv_codoDerecho.attach(11, 544, 2400);
   Sensor_A.SetMinMax(10, 1000);
   randomSeed(analogRead(A0));
 
@@ -93,12 +73,32 @@ void setup() {
 
 void loop() {
                                                       
-m_inicio_operativo();
-//f_pruebaComponentes();
+//m_inicio_operativo();
+f_pruebaComponentes();
 
 }
 
   //////////////////////////////
+
+void f_pruebaComponentes() {
+//f_posicionZero();
+//f_caminaSigiloso1();
+//f_caminaPanza();
+f_caminaSigiloso();
+//f_caminaSigiloso1();
+//f_escapaPorDerecha();
+//f_escapaPorIzquierda();
+//f_banner1();
+//f_posicionAcostado();
+//f_posicionAburrido1();
+//f_posicionAburrido2(); 
+//f_posicionAburrido3();
+//f_posicionAburrido4();
+//f_posicionAburrido5();
+    
+    }
+
+//////////////////////////////
 
 void m_inicio_operativo() {
 Serial.print("Consurrencia inicial: ");
@@ -147,13 +147,13 @@ delay(100);
           choque=0;
         }
         
-        if(Lectura>150 ){
+        if(Lectura>200 ){
           corre++;
         }
-        if (Lectura <=35 ) {
+        if (Lectura <=15 ) {
           choque++;
         }
-        if(Lectura>35 && Lectura<150){
+        if(Lectura>15 && Lectura<200){
           camina++;
         }
 
@@ -167,13 +167,13 @@ delay(100);
         Serial.println(corre);
 
         
-                if(Lectura>150 && corre ==3 ){ //Si la distancia es mayor a 80cm avanza rapido.
+                if(Lectura>200 && corre ==3 ){ //Si la distancia es mayor a 80cm avanza rapido.
 
                 f_caminaPanza();
                 }
                 else
                 {
-                    if(Lectura>35 && Lectura<150 && camina ==3 ){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
+                    if(Lectura>30 && Lectura<200 && camina ==3 ){ //Si la distancia se encuentra entre 30cm y 80cm avanza con cautela .  
 
                       if (concurrencia_distancia >=40 && concurrencia_distancia <=50) {
                         Serial.print("----------------------------------------------------------------Entro");
@@ -231,7 +231,7 @@ delay(100);
                     { 
                        f_caminaSigiloso();
                         
-                       if (Lectura <=35  && choque == 3) {
+                       if (Lectura <=15  && choque == 3) {
                         randomNumber = random(1,3);
                         switch (randomNumber) {
                             case (1): {
@@ -271,27 +271,7 @@ delay(100);
 
 }
 
-//////////////////////////////
 
-void f_pruebaComponentes() {
-//f_posicionZero();
-//f_caminaSigiloso1();
-//f_caminaPanza();
-f_caminaSigiloso();
-//f_caminaSigiloso1();
-//f_escapaPorDerecha();
-//f_escapaPorIzquierda();
-//f_banner1();
-//f_posicionAcostado();
-//f_posicionAburrido1();
-//f_posicionAburrido2(); 
-//f_posicionAburrido3();
-//f_posicionAburrido4();
-//f_posicionAburrido5();
-    
-    }
-
-//////////////////////////////
 
 void f_posicionZero() {
 
@@ -299,14 +279,14 @@ void f_posicionZero() {
     //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
 
     Serial.print("En este momento: PosicionZero");
-    sv_piernaDerecha.writeMicroseconds(1500); 
-    sv_piernaIzquierda.writeMicroseconds(1500); 
-    sv_hombroIzquierdo.writeMicroseconds(1500); 
-    sv_hombroDerecho.writeMicroseconds(1500); 
-    sv_rodillaIzquierda.writeMicroseconds(1500); 
-    sv_rodillaDerecha.writeMicroseconds(1500); 
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_codoDerecho.writeMicroseconds(1500); 
+    sv_piernaDerecha.write(90);
+    sv_piernaIzquierda.write(90);
+    sv_hombroIzquierdo.write(90);
+    sv_hombroDerecho.write(90);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
    
 }
 
@@ -316,14 +296,14 @@ void f_posicionAcostado() {
 
     //Esta posicion no se encuentra implementado
     Serial.print("En este momento: PosicionAcostado");
-    sv_piernaDerecha.WriteMicroseconds(1825);
-    sv_piernaIzquierda.WriteMicroseconds(1165);
-    sv_hombroIzquierdo.WriteMicroseconds(1605);
-    sv_hombroDerecho.WriteMicroseconds(1385);
-    sv_rodillaIzquierda.writeMicroseconds(1500); 
-    sv_rodillaDerecha.writeMicroseconds(1500); 
-    sv_codoIzquierdo.WriteMicroseconds(1220);
-    sv_codoDerecho.WriteMicroseconds(1770);
+    sv_piernaDerecha.write(150);
+    sv_piernaIzquierda.write(30);
+    sv_hombroIzquierdo.write(110);
+    sv_hombroDerecho.write(70);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(40);
+    sv_codoDerecho.write(140);
    
 }
 
@@ -333,14 +313,14 @@ void f_posicionAburrido1() {
 
     //Esta posicion no se encuentra implementado
     Serial.print("En este momento: PosicionAburrido1");
-    sv_piernaDerecha.WriteMicroseconds(1935);
-    sv_piernaIzquierda.writeMicroseconds(1055);
-    sv_hombroIzquierdo.writeMicroseconds(1055);
-    sv_hombroDerecho.WriteMicroseconds(1935);
-    sv_rodillaIzquierda.writeMicroseconds(1500); 
-    sv_rodillaDerecha.writeMicroseconds(1500); 
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_codoDerecho.writeMicroseconds(1500); 
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
    
 }
 
@@ -352,23 +332,23 @@ void f_posicionAburrido2() {
    Serial.print("En este momento: PosicionAburrido2"); 
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
-    sv_piernaDerecha.WriteMicroseconds(1935);
-    sv_piernaIzquierda.writeMicroseconds(1055);
-    sv_hombroIzquierdo.writeMicroseconds(1055);
-    sv_hombroDerecho.WriteMicroseconds(1935);
-    sv_rodillaIzquierda.writeMicroseconds(1055);
-    sv_rodillaDerecha.writeMicroseconds(1500); 
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_codoDerecho.writeMicroseconds(1500); 
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
+    sv_rodillaIzquierda.write(10);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
     delay(500);
-    sv_piernaDerecha.WriteMicroseconds(1935);
-    sv_piernaIzquierda.writeMicroseconds(1055);
-    sv_hombroIzquierdo.writeMicroseconds(1055);
-    sv_hombroDerecho.WriteMicroseconds(1935);
-    sv_rodillaIzquierda.writeMicroseconds(1500); 
-    sv_rodillaDerecha.writeMicroseconds(1500); 
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_codoDerecho.writeMicroseconds(1500); 
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
     delay(500);
    }
    
@@ -384,23 +364,23 @@ void f_posicionAburrido3() {
    Serial.print("En este momento: PosicionAburrido3");
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
-    sv_piernaDerecha.WriteMicroseconds(1935);
-    sv_piernaIzquierda.writeMicroseconds(1055);
-    sv_hombroIzquierdo.writeMicroseconds(1055);
-    sv_hombroDerecho.WriteMicroseconds(1935);
-    sv_rodillaIzquierda.writeMicroseconds(1500); 
-    sv_rodillaDerecha.writeMicroseconds(1500); 
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_codoDerecho.writeMicroseconds(1500); 
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
     delay(500);
-    sv_piernaDerecha.WriteMicroseconds(1935););
-    sv_piernaIzquierda.writeMicroseconds(1055);
-    sv_hombroIzquierdo.writeMicroseconds(1055);
-    sv_hombroDerecho.WriteMicroseconds(1935);
-    sv_rodillaIzquierda.writeMicroseconds(1500); 
-    sv_rodillaDerecha.writeMicroseconds(1500); 
-    sv_codoIzquierdo.WriteMicroseconds(1935);
-    sv_codoDerecho.writeMicroseconds(1500); 
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(70);
+    sv_codoDerecho.write(90);
     delay(500);
    }
    
@@ -415,23 +395,23 @@ void f_posicionAburrido4() {
    Serial.print("En este momento: PosicionAburrido4");
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
-    sv_piernaDerecha.WriteMicroseconds(1935);
-    sv_piernaIzquierda.writeMicroseconds(1055);
-    sv_hombroIzquierdo.writeMicroseconds(1055);
-    sv_hombroDerecho.WriteMicroseconds(1935);
-    sv_rodillaIzquierda.writeMicroseconds(1500); 
-    sv_rodillaDerecha.writeMicroseconds(1500); 
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_codoDerecho.writeMicroseconds(1500); 
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
     delay(500);
-    sv_piernaDerecha.WriteMicroseconds(1935);
-    sv_piernaIzquierda.writeMicroseconds(1055);
-    sv_hombroIzquierdo.writeMicroseconds(1055);
-    sv_hombroDerecho.WriteMicroseconds(1935);
-    sv_rodillaIzquierda.WriteMicroseconds(1660);
-    sv_rodillaDerecha.writeMicroseconds(1500); 
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_codoDerecho.writeMicroseconds(1500); 
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
+    sv_rodillaIzquierda.write(120);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
     delay(500);
    }
    
@@ -446,23 +426,23 @@ void f_posicionAburrido5() {
    Serial.print("En este momento: PosicionAburrido5");
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
-    sv_piernaDerecha.WriteMicroseconds(1935);
-    sv_piernaIzquierda.writeMicroseconds(1055);
-    sv_hombroIzquierdo.writeMicroseconds(1055);
-    sv_hombroDerecho.WriteMicroseconds(1935);
-    sv_rodillaIzquierda.writeMicroseconds(1500); 
-    sv_rodillaDerecha.writeMicroseconds(1500); 
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_codoDerecho.writeMicroseconds(1500); 
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
     delay(500);
-    sv_piernaDerecha.WriteMicroseconds(1935);;
-    sv_piernaIzquierda.writeMicroseconds(1055);
-    sv_hombroIzquierdo.writeMicroseconds(1055);
-    sv_hombroDerecho.WriteMicroseconds(1935);
-    sv_rodillaIzquierda.writeMicroseconds(1500); 
-    sv_rodillaDerecha.WriteMicroseconds(1935);
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_codoDerecho.writeMicroseconds(1500); 
+    sv_piernaDerecha.write(170);
+    sv_piernaIzquierda.write(10);
+    sv_hombroIzquierdo.write(10);
+    sv_hombroDerecho.write(170);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(70);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
     delay(500);
    }
    
@@ -471,80 +451,80 @@ void f_posicionAburrido5() {
 
 void f_caminaSigiloso(){
     Serial.print("En este momento: CaminaSigiloso");
-    sv_piernaDerecha.WriteMicroseconds(1660);
-    sv_hombroDerecho.WriteMicroseconds(1250);
-    sv_codoDerecho.WriteMicroseconds(1935);
+    sv_piernaDerecha.write(120);
+    sv_hombroDerecho.write(45);
+    sv_codoDerecho.write(170);
     delay(200);
-    sv_rodillaDerecha.WriteMicroseconds(1192);
+    sv_rodillaDerecha.write(135);
     delay(200);
-    sv_rodillaDerecha.writeMicroseconds(1500); 
+    sv_rodillaDerecha.write(90);
     
     delay(200);
-    sv_piernaDerecha.WriteMicroseconds(1330);
-    sv_hombroDerecho.WriteMicroseconds(1192);
+    sv_piernaDerecha.write(60);
+    sv_hombroDerecho.write(135);
     delay(200);
-    sv_codoDerecho.WriteMicroseconds(1192);
+    sv_codoDerecho.write(135);
     delay(200);
-    sv_codoDerecho.writeMicroseconds(1500); 
-    sv_rodillaDerecha.WriteMicroseconds(1935);
+    sv_codoDerecho.write(90);
+    sv_rodillaDerecha.write(170);
     delay(200);
       
-    sv_piernaIzquierda.WriteMicroseconds(1330);
-    sv_hombroIzquierdo.WriteMicroseconds(1192);
-    sv_codoIzquierdo.writeMicroseconds(1055);
+    sv_piernaIzquierda.write(60);
+    sv_hombroIzquierdo.write(135);
+    sv_codoIzquierdo.write(10);
     delay(200);
-    sv_rodillaIzquierda.WriteMicroseconds(1250);
+    sv_rodillaIzquierda.write(45);
     delay(200);
-    sv_rodillaIzquierda.writeMicroseconds(1500); 
+    sv_rodillaIzquierda.write(90);
     
     delay(200); 
-    sv_piernaIzquierda.WriteMicroseconds(1660);
-    sv_hombroIzquierdo.WriteMicroseconds(1250);
+    sv_piernaIzquierda.write(120);
+    sv_hombroIzquierdo.write(45);
     delay(200);
-    sv_codoIzquierdo.WriteMicroseconds(1250); 
+    sv_codoIzquierdo.write(45); 
     delay(200);
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_rodillaIzquierda.writeMicroseconds(1055);
+    sv_codoIzquierdo.write(90);
+    sv_rodillaIzquierda.write(10);
     delay(200);
     
 }
 
 void f_caminaSigiloso1(){
     Serial.print("En este momento: CaminaSigiloso1");
-    sv_piernaDerecha.WriteMicroseconds(1660);
-    sv_hombroDerecho.WriteMicroseconds(1250);
-    sv_codoDerecho.WriteMicroseconds(1935);
+    sv_piernaDerecha.write(120);
+    sv_hombroDerecho.write(45);
+    sv_codoDerecho.write(170);
     delay(500);
-    sv_rodillaDerecha.WriteMicroseconds(1192);
+    sv_rodillaDerecha.write(135);
     delay(500);
-    sv_rodillaDerecha.WriteMicroseconds(1550);
+    sv_rodillaDerecha.write(100);
     
     delay(500);
-    sv_piernaDerecha.WriteMicroseconds(1330);
-    sv_hombroDerecho.WriteMicroseconds(1192);
+    sv_piernaDerecha.write(60);
+    sv_hombroDerecho.write(135);
     delay(500);
-    sv_codoDerecho.WriteMicroseconds(1192);
+    sv_codoDerecho.write(135);
     delay(500);
-    sv_codoDerecho.writeMicroseconds(1500); 
-    sv_rodillaDerecha.WriteMicroseconds(1935);
+    sv_codoDerecho.write(90);
+    sv_rodillaDerecha.write(170);
     delay(500);
       
-    sv_piernaIzquierda.WriteMicroseconds(1330);
-    sv_hombroIzquierdo.WriteMicroseconds(1192);
-    sv_codoIzquierdo.writeMicroseconds(1055);
+    sv_piernaIzquierda.write(60);
+    sv_hombroIzquierdo.write(135);
+    sv_codoIzquierdo.write(10);
     delay(500);
-    sv_rodillaIzquierda.WriteMicroseconds(1250);
+    sv_rodillaIzquierda.write(45);
     delay(500);
-    sv_rodillaIzquierda.WriteMicroseconds(1385);
+    sv_rodillaIzquierda.write(70);
     
     delay(500); 
-    sv_piernaIzquierda.WriteMicroseconds(1660);
-    sv_hombroIzquierdo.WriteMicroseconds(1250);
+    sv_piernaIzquierda.write(120);
+    sv_hombroIzquierdo.write(45);
     delay(500);
-    sv_codoIzquierdo.WriteMicroseconds(1250); 
+    sv_codoIzquierdo.write(45); 
     delay(500);
-    sv_codoIzquierdo.writeMicroseconds(1500); 
-    sv_rodillaIzquierda.writeMicroseconds(1055);
+    sv_codoIzquierdo.write(90);
+    sv_rodillaIzquierda.write(10);
     delay(500);
     
 }
@@ -556,20 +536,20 @@ void f_caminaPanza() {
   Serial.print("En este momento: CaminaPanza");
   randomNumber = random(5,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
-        sv_rodillaIzquierda.writeMicroseconds(1055);
-        sv_rodillaDerecha.WriteMicroseconds(1935);
-        sv_codoIzquierdo.writeMicroseconds(1055);
-        sv_codoDerecho.WriteMicroseconds(1935);
+        sv_rodillaIzquierda.write(10);
+        sv_rodillaDerecha.write(170);
+        sv_codoIzquierdo.write(10);
+        sv_codoDerecho.write(170);
         delay(400);
-        sv_piernaDerecha.WriteMicroseconds(1250);
-        sv_piernaIzquierda.WriteMicroseconds(1192);
-        sv_hombroIzquierdo.WriteMicroseconds(1250);
-        sv_hombroDerecho.WriteMicroseconds(1192); 
+        sv_piernaDerecha.write(45);
+        sv_piernaIzquierda.write(135);
+        sv_hombroIzquierdo.write(45);
+        sv_hombroDerecho.write(135); 
         delay(400);
-        sv_piernaDerecha.WriteMicroseconds(1192);
-        sv_piernaIzquierda.WriteMicroseconds(1250);
-        sv_hombroIzquierdo.WriteMicroseconds(1192);
-        sv_hombroDerecho.WriteMicroseconds(1250);
+        sv_piernaDerecha.write(135);
+        sv_piernaIzquierda.write(45);
+        sv_hombroIzquierdo.write(135);
+        sv_hombroDerecho.write(45);
         delay(400);
       
     }
@@ -581,19 +561,19 @@ void f_caminaPanza() {
 void f_escapaPorDerecha() {
     Serial.print("En este momento: EscapaDerecha");
     for (int pos = 1; pos <= 10; pos += 1) {
-    sv_piernaIzquierda.writeMicroseconds(1500); 
-    sv_hombroIzquierdo.writeMicroseconds(1500); 
-    sv_rodillaIzquierda.writeMicroseconds(1055);
-    sv_codoIzquierdo.writeMicroseconds(1055);
+    sv_piernaIzquierda.write(90);
+    sv_hombroIzquierdo.write(90);
+    sv_rodillaIzquierda.write(10);
+    sv_codoIzquierdo.write(10);
  
-    sv_rodillaDerecha.WriteMicroseconds(1935);
-    sv_codoDerecho.WriteMicroseconds(1935);
+    sv_rodillaDerecha.write(170);
+    sv_codoDerecho.write(170);
     delay(400);
-    sv_piernaDerecha.WriteMicroseconds(1250);
-    sv_hombroDerecho.WriteMicroseconds(1192); 
+    sv_piernaDerecha.write(45);
+    sv_hombroDerecho.write(135); 
     delay(400);
-    sv_piernaDerecha.WriteMicroseconds(1192);
-    sv_hombroDerecho.WriteMicroseconds(1250);
+    sv_piernaDerecha.write(135);
+    sv_hombroDerecho.write(45);
     delay(400);
     }
 
@@ -606,19 +586,19 @@ void f_escapaPorDerecha() {
 void f_escapaPorIzquierda() {
     Serial.print("En este momento: EscapaIzquierda");
     for (int pos = 1; pos <= 5; pos += 1) {
-    sv_piernaDerecha.writeMicroseconds(1500); 
-    sv_hombroDerecho.writeMicroseconds(1500); 
-    sv_rodillaDerecha.WriteMicroseconds(1935);
-    sv_codoDerecho.WriteMicroseconds(1935);
+    sv_piernaDerecha.write(90);
+    sv_hombroDerecho.write(90);
+    sv_rodillaDerecha.write(170);
+    sv_codoDerecho.write(170);
  
-    sv_rodillaIzquierda.writeMicroseconds(1055);
-    sv_codoIzquierdo.writeMicroseconds(1055);
+    sv_rodillaIzquierda.write(10);
+    sv_codoIzquierdo.write(10);
     delay(400);
-    sv_piernaIzquierda.WriteMicroseconds(1250);
-    sv_hombroIzquierdo.WriteMicroseconds(1192); 
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(135); 
     delay(400);
-    sv_piernaIzquierda.WriteMicroseconds(1192);
-    sv_hombroIzquierdo.WriteMicroseconds(1250);
+    sv_piernaIzquierda.write(135);
+    sv_hombroIzquierdo.write(45);
     delay(400);
     }
 
