@@ -84,9 +84,14 @@ void f_pruebaComponentes() {
 //f_posicionZero();
 //f_caminaSigiloso1();
 //f_caminaPanza();
-f_caminaSigiloso();
+//f_caminaSigiloso();
 //f_caminaSigiloso1();
 //f_escapaPorDerecha();
+//f_posicionAtento();
+//f_posicionEspia();
+//f_posicionArana();
+//f_posicionIncado();
+f_posicionInclinadoDerecha();
 //f_escapaPorIzquierda();
 //f_banner1();
 //f_posicionAcostado();
@@ -288,6 +293,117 @@ void f_posicionZero() {
     sv_codoIzquierdo.write(90);
     sv_codoDerecho.write(90);
    
+}
+
+//////////////////////////////
+
+void f_posicionAtento() {
+
+    //Esta posicion no se encuentra implementado
+    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
+
+    Serial.print("En este momento: PosicionZero");
+    sv_piernaDerecha.write(45);
+    sv_piernaIzquierda.write(135);
+    sv_hombroIzquierdo.write(135);
+    sv_hombroDerecho.write(45);
+    sv_rodillaIzquierda.write(10);
+    sv_rodillaDerecha.write(170);
+    sv_codoIzquierdo.write(10);
+    sv_codoDerecho.write(170);
+   
+}
+
+//////////////////////////////
+
+void f_posicionEspia() {
+
+    //Esta posicion no se encuentra implementado
+    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
+
+    Serial.print("En este momento: PosicionZero");
+    sv_piernaDerecha.write(135);
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(135);
+    sv_hombroDerecho.write(45);
+    sv_rodillaIzquierda.write(170);
+    sv_rodillaDerecha.write(10);
+    sv_codoIzquierdo.write(10);
+    sv_codoDerecho.write(170);
+}
+
+//////////////////////////////
+
+void f_posicionInclinado() {
+
+    //Esta posicion no se encuentra implementado
+    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
+
+    Serial.print("En este momento: PosicionZero");
+    sv_piernaDerecha.write(135);
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(135);
+    sv_hombroDerecho.write(45);
+    sv_rodillaIzquierda.write(170);
+    sv_rodillaDerecha.write(10);
+    sv_codoIzquierdo.write(10);
+    sv_codoDerecho.write(170);
+}
+
+//////////////////////////////
+
+void f_posicionInclinadoDerecha() {
+
+    //Esta posicion no se encuentra implementado
+    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
+
+    Serial.print("En este momento: PosicionZero");
+    sv_piernaDerecha.write(135);
+    sv_piernaIzquierda.write(90);
+    sv_hombroIzquierdo.write(90);
+    sv_hombroDerecho.write(45);
+    sv_rodillaIzquierda.write(135);
+    sv_rodillaDerecha.write(10);
+    sv_codoIzquierdo.write(45);
+    sv_codoDerecho.write(170);
+}
+
+//////////////////////////////
+void f_posicionArana() {
+
+    //Esta posicion no se encuentra implementado
+    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
+
+    Serial.print("En este momento: PosicionZero");
+    
+    sv_hombroIzquierdo.write(45);
+    sv_hombroDerecho.write(135);
+    delay(900);
+    sv_piernaDerecha.write(45);
+    sv_piernaIzquierda.write(135);
+    sv_rodillaIzquierda.write(10);
+    sv_rodillaDerecha.write(170);
+    sv_codoIzquierdo.write(170);
+    sv_codoDerecho.write(10);
+}
+
+//////////////////////////////
+
+void f_posicionIncado() {
+
+    //Esta posicion no se encuentra implementado
+    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
+
+    Serial.print("En este momento: PosicionZero");
+    sv_piernaDerecha.write(90);
+    sv_piernaIzquierda.write(90);
+    delay(900);
+    sv_hombroIzquierdo.write(90);
+    sv_hombroDerecho.write(90);
+    sv_rodillaIzquierda.write(0);
+    sv_rodillaDerecha.write(180);
+    sv_codoIzquierdo.write(180);
+    sv_codoDerecho.write(0);
 }
 
 //////////////////////////////
