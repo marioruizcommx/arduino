@@ -88,10 +88,16 @@ void f_pruebaComponentes() {
 //f_caminaSigiloso1();
 //f_escapaPorDerecha();
 //f_posicionAtento();
+//f_caminaRobot1();
+//f_caminaRobot2();
+//f_posicionAgachado();
 //f_posicionEspia();
 //f_posicionArana();
 //f_posicionIncado();
-f_posicionInclinadoDerecha();
+//f_posicionInclinadoDerecha();
+//f_posicionInclinadoIzquierda();
+//f_posicionLevantaMirada();
+//f_posicionAgachaMirada();
 //f_escapaPorIzquierda();
 //f_banner1();
 //f_posicionAcostado();
@@ -100,7 +106,53 @@ f_posicionInclinadoDerecha();
 //f_posicionAburrido3();
 //f_posicionAburrido4();
 //f_posicionAburrido5();
-    
+ 
+f_posicionAburrido1();  
+delay(4000);
+f_posicionAcostado();
+delay(4000);
+f_posicionAtento();
+delay(4000);
+f_posicionInclinadoDerecha();
+delay(3000);
+f_posicionInclinadoIzquierda();
+delay(3000);
+f_posicionInclinadoDerecha();
+delay(3000);
+f_posicionInclinadoIzquierda();
+delay(4000);
+f_caminaRobot2();
+f_caminaRobot2();
+f_caminaRobot2();
+f_caminaRobot2();
+f_caminaRobot2();
+f_caminaRobot2();
+delay(4000);
+f_posicionEspia();
+delay(4000);
+f_posicionLevantaMirada();
+delay(3000);
+f_posicionAgachaMirada();
+delay(3000);
+f_posicionLevantaMirada();
+delay(3000);
+f_posicionAgachaMirada();
+delay(4000);
+f_posicionAgachado();
+delay(4000);
+f_caminaPanza();
+f_caminaPanza();
+delay(4000);
+f_posicionAtento();
+delay(4000);
+f_posicionInclinadoDerecha();
+delay(4000);
+f_posicionInclinadoIzquierda();
+delay(4000);
+f_posicionInclinadoDerecha();
+delay(4000);
+f_posicionInclinadoIzquierda();
+delay(4000);
     }
 
 //////////////////////////////
@@ -185,7 +237,7 @@ delay(100);
                         randomNumber = random(1,3);
                         switch (randomNumber) {
                             case (1): {
-                              f_caminaSigiloso();
+                              f_caminaRobot2();
                                 break;
                               }
                             case (2): {
@@ -234,7 +286,7 @@ delay(100);
                     }
                     else
                     { 
-                       f_caminaSigiloso();
+                       f_caminaRobot2();
                         
                        if (Lectura <=15  && choque == 3) {
                         randomNumber = random(1,3);
@@ -299,10 +351,7 @@ void f_posicionZero() {
 
 void f_posicionAtento() {
 
-    //Esta posicion no se encuentra implementado
-    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
-
-    Serial.print("En este momento: PosicionZero");
+    Serial.print("En este momento: f_posicionAtento");
     sv_piernaDerecha.write(45);
     sv_piernaIzquierda.write(135);
     sv_hombroIzquierdo.write(135);
@@ -316,12 +365,25 @@ void f_posicionAtento() {
 
 //////////////////////////////
 
-void f_posicionEspia() {
+void f_posicionAgachado() {
 
-    //Esta posicion no se encuentra implementado
-    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
+    Serial.print("En este momento: f_posicionAtento");
+    sv_piernaDerecha.write(20);
+    sv_piernaIzquierda.write(160);
+    sv_hombroIzquierdo.write(160);
+    sv_hombroDerecho.write(20);
+    sv_rodillaIzquierda.write(0);
+    sv_rodillaDerecha.write(180);
+    sv_codoIzquierdo.write(0);
+    sv_codoDerecho.write(180);
+   
+}
 
-    Serial.print("En este momento: PosicionZero");
+//////////////////////////////
+
+void f_caminaRobot1() {
+
+    Serial.print("En este momento: f_posicionAtento");
     sv_piernaDerecha.write(135);
     sv_piernaIzquierda.write(45);
     sv_hombroIzquierdo.write(135);
@@ -330,16 +392,128 @@ void f_posicionEspia() {
     sv_rodillaDerecha.write(10);
     sv_codoIzquierdo.write(10);
     sv_codoDerecho.write(170);
+    delay(300);
+    
+    sv_piernaIzquierda.write(5);
+    delay(200);
+    sv_piernaIzquierda.write(30);
+    sv_rodillaIzquierda.write(160);
+    delay(300);
+
+
+    sv_hombroIzquierdo.write(180);
+    delay(200);
+    sv_codoIzquierdo.write(0);
+    sv_hombroIzquierdo.write(120);
+    sv_piernaIzquierda.write(15);
+    delay(300);
+
+
+    sv_piernaDerecha.write(175);
+    delay(200);
+    sv_piernaDerecha.write(140);
+    sv_rodillaDerecha.write(20);
+    delay(300);
+
+
+    sv_hombroDerecho.write(0);
+    delay(200);
+    sv_codoDerecho.write(180);
+    sv_hombroDerecho.write(60);
+    sv_piernaDerecha.write(165);
+    
+    
 }
 
 //////////////////////////////
 
-void f_posicionInclinado() {
 
-    //Esta posicion no se encuentra implementado
-    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
+void f_caminaRobot2() {
 
-    Serial.print("En este momento: PosicionZero");
+    Serial.print("En este momento: f_posicionAtento");
+    sv_piernaDerecha.write(130);
+    sv_piernaIzquierda.write(50);
+    sv_hombroIzquierdo.write(50);
+    sv_hombroDerecho.write(130);
+    sv_rodillaIzquierda.write(170);
+    sv_rodillaDerecha.write(10);
+    sv_codoIzquierdo.write(170);
+    sv_codoDerecho.write(10);
+    delay(500);
+    
+    sv_piernaIzquierda.write(5);
+    delay(200);
+    sv_piernaIzquierda.write(30);
+    sv_rodillaIzquierda.write(160);
+    delay(500);
+
+
+    sv_hombroIzquierdo.write(5);
+    delay(200);
+    sv_hombroIzquierdo.write(30);
+    sv_codoIzquierdo.write(160);
+    delay(500);
+
+
+    sv_piernaDerecha.write(175);
+    delay(200);
+    sv_piernaDerecha.write(140);
+    sv_rodillaDerecha.write(20);
+    delay(500);
+
+
+    sv_hombroDerecho.write(175);
+    delay(200);
+    sv_hombroDerecho.write(150);
+    sv_codoDerecho.write(20);
+    
+}
+//////////////////////////////
+void f_vuelta() {
+
+    Serial.print("En este momento: f_posicionAtento");
+    sv_piernaDerecha.write(135);
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(45);
+    sv_hombroDerecho.write(135);
+    sv_rodillaIzquierda.write(170);
+    sv_rodillaDerecha.write(10);
+    sv_codoIzquierdo.write(170);
+    sv_codoDerecho.write(10);
+    delay(2000);
+    
+    sv_piernaIzquierda.write(0);
+    delay(200);
+    sv_piernaIzquierda.write(10);
+    sv_rodillaIzquierda.write(160);
+    delay(2000);
+
+
+    sv_hombroIzquierdo.write(0);
+    delay(200);
+    sv_hombroIzquierdo.write(10);
+    sv_codoIzquierdo.write(160);
+    delay(2000);
+
+
+    sv_piernaDerecha.write(0);
+    delay(200);
+    sv_piernaDerecha.write(10);
+    sv_rodillaDerecha.write(160);
+    delay(2000);
+
+
+    sv_hombroDerecho.write(0);
+    delay(200);
+    sv_hombroDerecho.write(10);
+    sv_codoDerecho.write(160);
+    delay(2000);
+    
+}
+//////////////////////////////
+void f_posicionEspia() {
+
+    Serial.print("En este momento: f_posicionEspia");
     sv_piernaDerecha.write(135);
     sv_piernaIzquierda.write(45);
     sv_hombroIzquierdo.write(135);
@@ -354,28 +528,64 @@ void f_posicionInclinado() {
 
 void f_posicionInclinadoDerecha() {
 
-    //Esta posicion no se encuentra implementado
-    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
-
-    Serial.print("En este momento: PosicionZero");
+    Serial.print("En este momento: f_posicionInclinadoDerecha");
     sv_piernaDerecha.write(135);
     sv_piernaIzquierda.write(90);
     sv_hombroIzquierdo.write(90);
     sv_hombroDerecho.write(45);
-    sv_rodillaIzquierda.write(135);
+    sv_rodillaIzquierda.write(90);
     sv_rodillaDerecha.write(10);
-    sv_codoIzquierdo.write(45);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(170);
+}
+
+//////////////////////////////
+
+void f_posicionInclinadoIzquierda() {
+
+    Serial.print("En este momento: f_posicionInclinadoIzquierda");
+    sv_piernaDerecha.write(90);
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(135);
+    sv_hombroDerecho.write(90);
+    sv_rodillaIzquierda.write(170);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(10);
+    sv_codoDerecho.write(90);
+}
+
+//////////////////////////////
+
+void f_posicionLevantaMirada() {
+
+    Serial.print("En este momento: f_posicionLevantaMirada");
+    sv_piernaDerecha.write(135);
+    sv_piernaIzquierda.write(45);
+    sv_hombroIzquierdo.write(90);
+    sv_hombroDerecho.write(90);
+    sv_rodillaIzquierda.write(170);
+    sv_rodillaDerecha.write(10);
+    sv_codoIzquierdo.write(90);
+    sv_codoDerecho.write(90);
+}
+
+void f_posicionAgachaMirada() {
+
+    Serial.print("En este momento: f_posicionAgachaMirada");
+    sv_piernaDerecha.write(90);
+    sv_piernaIzquierda.write(90);
+    sv_hombroIzquierdo.write(135);
+    sv_hombroDerecho.write(45);
+    sv_rodillaIzquierda.write(90);
+    sv_rodillaDerecha.write(90);
+    sv_codoIzquierdo.write(10);
     sv_codoDerecho.write(170);
 }
 
 //////////////////////////////
 void f_posicionArana() {
 
-    //Esta posicion no se encuentra implementado
-    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
-
-    Serial.print("En este momento: PosicionZero");
-    
+    Serial.print("En este momento: f_posicionArana");
     sv_hombroIzquierdo.write(45);
     sv_hombroDerecho.write(135);
     delay(900);
@@ -387,14 +597,12 @@ void f_posicionArana() {
     sv_codoDerecho.write(10);
 }
 
+
 //////////////////////////////
 
 void f_posicionIncado() {
-
-    //Esta posicion no se encuentra implementado
-    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
-
-    Serial.print("En este momento: PosicionZero");
+  
+    Serial.print("En este momento: f_posicionIncado");
     sv_piernaDerecha.write(90);
     sv_piernaIzquierda.write(90);
     delay(900);
@@ -410,8 +618,7 @@ void f_posicionIncado() {
 
 void f_posicionAcostado() {
 
-    //Esta posicion no se encuentra implementado
-    Serial.print("En este momento: PosicionAcostado");
+    Serial.print("En este momento: f_posicionAcostado");
     sv_piernaDerecha.write(150);
     sv_piernaIzquierda.write(30);
     sv_hombroIzquierdo.write(110);
@@ -426,9 +633,8 @@ void f_posicionAcostado() {
 //////////////////////////////
 
 void f_posicionAburrido1() {
-
-    //Esta posicion no se encuentra implementado
-    Serial.print("En este momento: PosicionAburrido1");
+  
+    Serial.print("En este momento: f_posicionAburrido1");
     sv_piernaDerecha.write(170);
     sv_piernaIzquierda.write(10);
     sv_hombroIzquierdo.write(10);
@@ -444,8 +650,7 @@ void f_posicionAburrido1() {
 
 void f_posicionAburrido2() {
 
-    //Esta posicion no se encuentra implementado
-   Serial.print("En este momento: PosicionAburrido2"); 
+   Serial.print("En este momento: f_posicionAburrido2"); 
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(170);
@@ -476,8 +681,7 @@ void f_posicionAburrido2() {
 
 void f_posicionAburrido3() {
 
-    //Esta posicion no se encuentra implementado
-   Serial.print("En este momento: PosicionAburrido3");
+   Serial.print("En este momento: f_posicionAburrido3");
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(170);
@@ -507,8 +711,7 @@ void f_posicionAburrido3() {
 
 void f_posicionAburrido4() {
 
-    //Esta posicion no se encuentra implementado
-   Serial.print("En este momento: PosicionAburrido4");
+   Serial.print("En este momento: f_posicionAburrido4");
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(170);
@@ -538,8 +741,7 @@ void f_posicionAburrido4() {
 
 void f_posicionAburrido5() {
 
-    //Esta posicion no se encuentra implementado
-   Serial.print("En este momento: PosicionAburrido5");
+   Serial.print("En este momento: f_posicionAburrido5");
    randomNumber = random(1,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
     sv_piernaDerecha.write(170);
@@ -566,6 +768,7 @@ void f_posicionAburrido5() {
 //////////////////////////////
 
 void f_caminaSigiloso(){
+  
     Serial.print("En este momento: CaminaSigiloso");
     sv_piernaDerecha.write(120);
     sv_hombroDerecho.write(45);
@@ -606,6 +809,7 @@ void f_caminaSigiloso(){
 }
 
 void f_caminaSigiloso1(){
+  
     Serial.print("En este momento: CaminaSigiloso1");
     sv_piernaDerecha.write(120);
     sv_hombroDerecho.write(45);
@@ -649,6 +853,7 @@ void f_caminaSigiloso1(){
 
     
 void f_caminaPanza() {
+  
   Serial.print("En este momento: CaminaPanza");
   randomNumber = random(5,10);
    for (int pos = 1; pos <= randomNumber; pos += 1) {
@@ -675,6 +880,7 @@ void f_caminaPanza() {
 //////////////////////////////
 
 void f_escapaPorDerecha() {
+  
     Serial.print("En este momento: EscapaDerecha");
     for (int pos = 1; pos <= 10; pos += 1) {
     sv_piernaIzquierda.write(90);
@@ -691,15 +897,14 @@ void f_escapaPorDerecha() {
     sv_piernaDerecha.write(135);
     sv_hombroDerecho.write(45);
     delay(400);
-    }
-
-    
+    }  
 }
 
 
 //////////////////////////////
 
 void f_escapaPorIzquierda() {
+  
     Serial.print("En este momento: EscapaIzquierda");
     for (int pos = 1; pos <= 5; pos += 1) {
     sv_piernaDerecha.write(90);
