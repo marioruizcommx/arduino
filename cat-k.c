@@ -99,60 +99,13 @@ void f_pruebaComponentes() {
 //f_posicionLevantaMirada();
 //f_posicionAgachaMirada();
 //f_escapaPorIzquierda();
-//f_banner1();
 //f_posicionAcostado();
 //f_posicionAburrido1();
 //f_posicionAburrido2(); 
 //f_posicionAburrido3();
 //f_posicionAburrido4();
 //f_posicionAburrido5();
- 
-f_posicionAburrido1();  
-delay(4000);
-f_posicionAcostado();
-delay(4000);
-f_posicionAtento();
-delay(4000);
-f_posicionInclinadoDerecha();
-delay(3000);
-f_posicionInclinadoIzquierda();
-delay(3000);
-f_posicionInclinadoDerecha();
-delay(3000);
-f_posicionInclinadoIzquierda();
-delay(4000);
-f_caminaRobot2();
-f_caminaRobot2();
-f_caminaRobot2();
-f_caminaRobot2();
-f_caminaRobot2();
-f_caminaRobot2();
-delay(4000);
-f_posicionEspia();
-delay(4000);
-f_posicionLevantaMirada();
-delay(3000);
-f_posicionAgachaMirada();
-delay(3000);
-f_posicionLevantaMirada();
-delay(3000);
-f_posicionAgachaMirada();
-delay(4000);
-f_posicionAgachado();
-delay(4000);
-f_caminaPanza();
-f_caminaPanza();
-delay(4000);
-f_posicionAtento();
-delay(4000);
-f_posicionInclinadoDerecha();
-delay(4000);
-f_posicionInclinadoIzquierda();
-delay(4000);
-f_posicionInclinadoDerecha();
-delay(4000);
-f_posicionInclinadoIzquierda();
-delay(4000);
+
     }
 
 //////////////////////////////
@@ -241,34 +194,59 @@ delay(100);
                                 break;
                               }
                             case (2): {
-                              delay(5000);
+                              delay(4000);
                               f_posicionAcostado();
+                              delay(4000);
+                              f_posicionAtento();
                               delay(5000);
                                   randomNumber = random(1,6);
                                   switch (randomNumber) {
                                     case (1): {
                                         delay(500);
-                                        f_posicionAburrido1();
-                                        delay(5000);
-                                        f_posicionAburrido2();
+                                        f_posicionInclinadoDerecha();
+                                        delay(3000);
+                                        f_posicionInclinadoIzquierda();
+                                        delay(3000);
+                                        f_posicionInclinadoDerecha();
+                                        delay(3000);
+                                        f_posicionInclinadoIzquierda();
                                         break;
                                       }
                                      case (2): {
-                                        f_posicionAburrido1();
-                                        delay(5000);
-                                        f_posicionAburrido3();
+                                        delay(3000);
+                                        f_posicionLevantaMirada();
+                                        delay(3000);
+                                        f_posicionAgachaMirada();
+                                        delay(3000);
+                                        f_posicionLevantaMirada();
+                                        delay(3000);
+                                        f_posicionAgachaMirada();
                                         break;
                                       }
                                      case (3): {
-                                        f_posicionAburrido1();
-                                        delay(5000);
-                                        f_posicionAburrido4();
+                                        f_posicionAgachado();
+                                        delay(3000);
+                                        f_posicionEspia();
+                                        delay(3000);
+                                        f_posicionAgachado();
+                                        delay(3000);
+                                        f_posicionEspia();
+                                        delay(3000);
                                         break;
                                       }
                                      case (4): {
+                                        f_posicionAcostado();
+                                        delay(3000);
                                         f_posicionAburrido1();
-                                        delay(5000);
+                                        delay(3000);
+                                        f_posicionAburrido2(); 
+                                        delay(3000);
+                                        f_posicionAburrido3();
+                                        delay(3000);
+                                        f_posicionAburrido4();
+                                        delay(3000);
                                         f_posicionAburrido5();
+                                        delay(3000);
                                         break;
                                       }
                                     default:
@@ -292,11 +270,11 @@ delay(100);
                         randomNumber = random(1,3);
                         switch (randomNumber) {
                             case (1): {
-                              f_escapaPorDerecha();//Al estar a 30cm o menos de un obstaculo recto comienza a girar a la derecha
+                              f_escapaPorDerecha();
                                 break;
                               }
                             case (2): {
-                              f_escapaPorIzquierda();//Al estar a 30cm o menos de un obstaculo recto comienza a girar a la izquierda
+                              f_escapaPorIzquierda();
                                 break;
                               }
                             default:
@@ -331,9 +309,6 @@ delay(100);
 
 
 void f_posicionZero() {
-
-    //Esta posicion no se encuentra implementado
-    //y deja al prototipo con las patas en la siguiente posicion: (derecho) |_ |_ °° _| _|  (izquierdo)
 
     Serial.print("En este momento: PosicionZero");
     sv_piernaDerecha.write(90);
@@ -400,7 +375,6 @@ void f_caminaRobot1() {
     sv_rodillaIzquierda.write(160);
     delay(300);
 
-
     sv_hombroIzquierdo.write(180);
     delay(200);
     sv_codoIzquierdo.write(0);
@@ -408,20 +382,17 @@ void f_caminaRobot1() {
     sv_piernaIzquierda.write(15);
     delay(300);
 
-
     sv_piernaDerecha.write(175);
     delay(200);
     sv_piernaDerecha.write(140);
     sv_rodillaDerecha.write(20);
     delay(300);
 
-
     sv_hombroDerecho.write(0);
     delay(200);
     sv_codoDerecho.write(180);
     sv_hombroDerecho.write(60);
     sv_piernaDerecha.write(165);
-    
     
 }
 
@@ -447,20 +418,17 @@ void f_caminaRobot2() {
     sv_rodillaIzquierda.write(160);
     delay(500);
 
-
     sv_hombroIzquierdo.write(5);
     delay(200);
     sv_hombroIzquierdo.write(30);
     sv_codoIzquierdo.write(160);
     delay(500);
 
-
     sv_piernaDerecha.write(175);
     delay(200);
     sv_piernaDerecha.write(140);
     sv_rodillaDerecha.write(20);
     delay(500);
-
 
     sv_hombroDerecho.write(175);
     delay(200);
@@ -488,20 +456,17 @@ void f_vuelta() {
     sv_rodillaIzquierda.write(160);
     delay(2000);
 
-
     sv_hombroIzquierdo.write(0);
     delay(200);
     sv_hombroIzquierdo.write(10);
     sv_codoIzquierdo.write(160);
     delay(2000);
 
-
     sv_piernaDerecha.write(0);
     delay(200);
     sv_piernaDerecha.write(10);
     sv_rodillaDerecha.write(160);
     delay(2000);
-
 
     sv_hombroDerecho.write(0);
     delay(200);
@@ -597,7 +562,6 @@ void f_posicionArana() {
     sv_codoDerecho.write(10);
 }
 
-
 //////////////////////////////
 
 void f_posicionIncado() {
@@ -674,7 +638,6 @@ void f_posicionAburrido2() {
    }
    
 }
-
 
 ////////////////////////////////
 
@@ -928,15 +891,6 @@ void f_escapaPorIzquierda() {
 ///////////////////////////////
 
 void f_banner1(){
-Serial.println("          _   _             _                   _                  _ _   _               "); 
-Serial.println("     /\  | | | |           | |            /\   | |                (_) | | |              ");
-Serial.println("    /  \ | |_| | __ _ _ __ | |_ __ _     /  \  | | __ _  ___  _ __ _| |_| |__  _ __ ___  ");
-Serial.println("   / /\ \| __| |/ _` | '_ \| __/ _` |   / /\ \ | |/ _` |/ _ \| '__| | __| '_ \| '_ ` _ \ ");
-Serial.println("  / ____ \ |_| | (_| | | | | || (_| |  / ____ \| | (_| | (_) | |  | | |_| | | | | | | | |");
-Serial.println(" /_/    \_\__|_|\__,_|_| |_|\__\__,_| /_/    \_\_|\__, |\___/|_|  |_|\__|_| |_|_| |_| |_|");
-Serial.println("                                                   __/ |                                 ");
-Serial.println("                                                  |___/                                  ");
-Serial.println("                                                                                         ");
 Serial.println("                                         https://www.atlantaalgorithm.com/               ");
 }
 
