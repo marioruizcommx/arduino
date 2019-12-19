@@ -73,8 +73,8 @@ void setup() {
 
 void loop() {
                                                       
-//m_inicio_operativo();
-f_pruebaComponentes();
+m_inicio_operativo();
+//f_pruebaComponentes();
 
 }
 
@@ -160,10 +160,10 @@ delay(100);
         if(Lectura>200 ){
           corre++;
         }
-        if (Lectura <=15 ) {
+        if (Lectura <=35 ) {
           choque++;
         }
-        if(Lectura>15 && Lectura<200){
+        if(Lectura>35 && Lectura<200){
           camina++;
         }
 
@@ -266,15 +266,27 @@ delay(100);
                     { 
                        f_caminaRobot2();
                         
-                       if (Lectura <=15  && choque == 3) {
+                       if (Lectura <=35  && choque == 3) {
                         randomNumber = random(1,3);
                         switch (randomNumber) {
                             case (1): {
+                              delay(3000);
+                              f_posicionAgachado();
+                              delay(3000);
                               f_escapaPorDerecha();
+                              delay(3000);
+                              f_posicionAgachado();
+                              delay(3000);
                                 break;
                               }
                             case (2): {
+                              delay(3000);
+                              f_posicionAgachado();
+                              delay(3000);
                               f_escapaPorIzquierda();
+                              delay(3000);
+                              f_posicionAgachado();
+                              delay(3000);
                                 break;
                               }
                             default:
@@ -328,11 +340,17 @@ void f_posicionAtento() {
 
     Serial.print("En este momento: f_posicionAtento");
     sv_piernaDerecha.write(45);
+    delay(100);
     sv_piernaIzquierda.write(135);
+    delay(100);
     sv_hombroIzquierdo.write(135);
+    delay(100);
     sv_hombroDerecho.write(45);
+    delay(100);
     sv_rodillaIzquierda.write(10);
+    delay(100);
     sv_rodillaDerecha.write(170);
+    delay(100);
     sv_codoIzquierdo.write(10);
     sv_codoDerecho.write(170);
    
