@@ -4,12 +4,6 @@
 /*
 *--------------------------------------------*
 *          Mario Ruiz Gonzalez               *
-*        www.atlantaalgorithm.com            *
-*--------------------------------------------*
-*  Ayudanos a seguir creando nuevos kits     *
-*  simplemente con No compartir este codigo. *
-*  esperamos que te diviertas, saludos.      *
-*--------------------------------------------*
 */
 
 //Declaracion de variables
@@ -909,25 +903,14 @@ void f_escapaPorIzquierda() {
 ///////////////////////////////
 
 void f_banner1(){
-Serial.println("                                         https://www.atlantaalgorithm.com/               ");
+Serial.println("/////////////////////////////////////");
 }
 
-///////////////////////////////
 
 void f_banner2(){
-Serial.println("    ,.   .  .          .          ,.   .                .  .         ");
-Serial.println("   / |   |- |  ,-. ,-. |- ,-.    / |   |  ,-. ,-. ,-. . |- |-. ,-,-. ");
-Serial.println("  /~~|-. |  |  ,-| | | |  ,-|   /~~|-. |  | | | | |   | |  | | | | | ");
-Serial.println(",'   `-' `' `' `-^ ' ' `' `-^ ,'   `-' `' `-| `-' '   ' `' ' ' ' ' ' ");
-Serial.println("                                           ,|                        ");
-Serial.println("                                           `'                        ");
-Serial.println("                             https://www.atlantaalgorithm.com/       ");
+Serial.println("-------------------------------------");
 }
 
 void f_banner3(){
 Serial.println(" +-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+-+");
-Serial.println(" |A|t|l|a|n|t|a| |A|l|g|o|r|i|t|h|m|");
-Serial.println(" +-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+-+");
-Serial.println("                                    ");
-Serial.println("   https://www.atlantaalgorithm.com/");
 }
